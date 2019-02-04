@@ -1,0 +1,161 @@
+body {
+    color: black;
+}
+
+header {
+    background: #153c43;
+    background-position: 20% 0;
+    position: fixed;
+}
+
+#map {
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #00bbd3;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 20%;
+    flex-direction: column;
+    padding: 1rem;
+    height: 100%;
+    z-index: 1;
+}
+
+input, .card-image {
+    width: 100%;
+    margin: .5rem;
+}
+
+#park {
+    width: 75%;
+}
+
+h1 {
+    font-size: 1.5rem;
+}
+
+p {
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+.subtitle {
+    font-weight: 700;
+}
+
+cite {
+    font-size: 75%;
+}
+
+.description {
+    font-size: 95%;
+    font-weight: 400;
+}
+
+.btn {
+    font-size: 1rem;
+}
+
+.btn:hover{
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.checked {
+    color: gold;
+}
+
+.open-spot {
+    position: absolute;
+    height: 5%;
+}
+
+#spot-one {
+    top: 700px;
+    left: 1100px;
+}
+
+#spot-one:hover {
+    height: 7%;
+    top: 680px;
+    left: 1087px;
+}
+
+#spot-two {
+    top: 200px;
+    left: 1200px;
+}
+
+#spot-two:hover {
+    height: 7%;
+    top: 180px;
+    left: 1187px;
+}
+
+#spot-three {
+    top: 500px;
+    left: 700px;
+}
+
+#spot-three:hover {
+    height: 7%;
+    top: 480px;
+    left: 687px;
+}
+
+#spot-four {
+    top: 1100px;
+    left: 1450px;
+}
+
+#spot-four:hover {
+    height: 7%;
+    top: 1080px;
+    left: 1437px;
+}
+
+.place-icon {
+    height: 100%;
+}
+
+@media (min-width: 768px)
+{
+    html {
+        height: 100%;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .btn {
+        font-size: 1.5rem;
+    }
+    
+    .btn:hover{
+        font-size: 2rem;
+    }
+}
+
+@media (min-width: 992px) 
+{
+    h1 {
+        font-size: 3.5rem;
+    }
+
+    .btn {
+        font-size: 2rem;
+    }
+    
+    .btn:hover{
+        font-size: 2.5rem;
+    }
+}
