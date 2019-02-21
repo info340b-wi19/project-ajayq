@@ -9,6 +9,11 @@ $('#menu').click(() => {
     $('#home').attr('hidden', false);
 });
 
+$('#back2').click(() => {
+    $('#menu').attr('hidden', false);
+    $('#home').attr('hidden', true);
+});
+
 function initMap() {
     var directionsService = new google.maps.DirectionsService();
     var directionsDisplay = new google.maps.DirectionsRenderer();
