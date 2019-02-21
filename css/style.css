@@ -6,12 +6,15 @@ header {
     background: #153c43;
     background-position: 20% 0;
     position: fixed;
+    z-index: 2;
 }
 
 #map {
     position: relative;
     top: 0;
     left: 0;
+    height: 40rem;
+    width: 100%;
 }
 
 nav {
@@ -26,7 +29,35 @@ nav {
     flex-direction: column;
     padding: 1rem;
     height: 100%;
-    z-index: 1;
+    overflow: scroll;
+}
+
+#menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #00bbd3;
+    height: 5rem;
+    width: 5rem;
+    border-radius: 50%;
+    padding: 1rem;
+    margin: 1rem;
+    text-align: center;
+}
+
+.fa-bars {
+    position: relative;
+    left: auto;
+    right: auto;
+    font-size: 300%;
+}
+
+footer {
+    width: 90%;
+}
+
+#copyright{
+    font-size: 65%;
 }
 
 input, .card-image {
@@ -75,7 +106,8 @@ cite {
 
 .open-spot {
     position: absolute;
-    height: 5%;
+    height: 5rem;
+    z-index: 0;
 }
 
 #spot-one {
@@ -84,7 +116,7 @@ cite {
 }
 
 #spot-one:hover {
-    height: 7%;
+    height: 7rem;
     top: 680px;
     left: 1087px;
 }
@@ -95,7 +127,7 @@ cite {
 }
 
 #spot-two:hover {
-    height: 7%;
+    height: 7rem;
     top: 180px;
     left: 1187px;
 }
@@ -106,7 +138,7 @@ cite {
 }
 
 #spot-three:hover {
-    height: 7%;
+    height: 7rem;
     top: 480px;
     left: 687px;
 }
@@ -117,7 +149,7 @@ cite {
 }
 
 #spot-four:hover {
-    height: 7%;
+    height: 7rem;
     top: 1080px;
     left: 1437px;
 }
@@ -126,8 +158,12 @@ cite {
     height: 100%;
 }
 
-@media (min-width: 768px)
+@media (min-height: 768px)
 {
+    #map {
+        height: 60rem;
+    }
+    
     html {
         height: 100%;
     }
@@ -145,8 +181,12 @@ cite {
     }
 }
 
-@media (min-width: 992px) 
+@media (min-height: 992px) 
 {
+    #map {
+        height: 80rem;
+    }    
+
     h1 {
         font-size: 3.5rem;
     }
