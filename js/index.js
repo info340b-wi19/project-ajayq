@@ -1,9 +1,3 @@
-function createMarkers(spots) {
-    let id = spots.id;
-    let x = spots.x;
-    let y = spots.y;
-}
-
 $('#menu').click(() => {
     $('#menu').attr('hidden', true);
     $('#home').attr('hidden', false);
