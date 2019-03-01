@@ -54,6 +54,7 @@ function initMap() {
                         // was clicked on, however I believe that due to the fact that I have not
                         // paid for the Google API it will not allow me to make these kinds of calls
                         // due to exceeding the call limit.
+                        //
                         // let parkID = document.querySelector('#parkID').textContent.slice(-1);
                         // let dest = {};
                         //     for (let i = 0; i < spots.length; i++) {
@@ -63,6 +64,7 @@ function initMap() {
                         // }
                         // console.log(dest);
                         // console.log(pos);
+                        
                         let request = {origin: UW, destination: pos, travelMode: 'DRIVING'};
                         directionsService.route(request, function(result, status) {
                             if (status == 'OK') {
