@@ -86,15 +86,29 @@ const TEST_YELP = {
 }
 
 export default class l extends Component {
+    // createMarker = (business) => {
+    //     let lat = business.coordinates.latitude;
+    //     let lon = business.coordinates.longitude;
+    //     return (<Marker position={[lat, lon]}>
+    //         <Popup>A pretty CSS3 popup.<br />Easily customizable.</Popup>
+    //     </Marker>)
+    // }
+    
     render() {
-        return (<Map center={[51.505, -0.09]} zoom={13}>
-            <TileLayer
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-            />
-            <Marker position={[51.505, -0.09]}>
-            <Popup>A pretty CSS3 popup.<br />Easily customizable.</Popup>
-            </Marker>
-        </Map>)
+        return (
+            <div id='map'>
+            <Map 
+                style={{height: '100vh'}}
+                center={[51.505, -0.09]}
+                 zoom={13}>
+                    <TileLayer
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    // attribution=";http://osm.org/copyright&quot;>OpenStreetMap"
+                    />
+                    {/* {createMarker(TEST_YELP)} */}
+                </Map>
+            </div>
+        )
     }
 }
+
