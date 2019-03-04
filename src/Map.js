@@ -86,29 +86,30 @@ const TEST_YELP = {
 }
 
 export default class l extends Component {
-    // createMarker = (business) => {
-    //     let lat = business.coordinates.latitude;
-    //     let lon = business.coordinates.longitude;
-    //     return (<Marker position={[lat, lon]}>
-    //         <Popup>A pretty CSS3 popup.<br />Easily customizable.</Popup>
-    //     </Marker>)
-    // }
-    
     render() {
         return (
             <div id='map'>
-            <Map 
-                style={{height: '100vh'}}
-                center={[51.505, -0.09]}
-                 zoom={13}>
-                    <TileLayer
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    // attribution=";http://osm.org/copyright&quot;>OpenStreetMap"
-                    />
-                    {/* {createMarker(TEST_YELP)} */}
+                <Map 
+                    style={{height: '100vh'}}
+                    center={[51.505, -0.09]}
+                    zoom={13}>
+                        <TileLayer
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        // attribution=";http://osm.org/copyright&quot;>OpenStreetMap"
+                        />
+                    <MyMarker />
                 </Map>
             </div>
         )
     }
 }
 
+class MyMarker extends Component {
+    render() {
+        let lat  = this.props.coordinates.latitude;
+        let lon = this.props.coordinates.longitude;
+        return (<Marker position={[lat, lon]}>
+            <Popup>A pretty CSS3 popup.<br />Easily customizable.</Popup>
+        </Marker>)
+    }
+}
