@@ -13,16 +13,35 @@ code {
     monospace;
 }
 
-#map { 
+#container {
   position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+#map { 
+  position: absolute;
+  z-index: 1;
   top: 0;
   left: 0;
-  z-index: 1;
+  width: 100%;
+  height: 100%;
 }
 
 #navbar {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
+  z-index: 10;
+  width: 100%;
+}
+
+#RestaurantCard {
+  position: absolute;
+  bottom: 0;
   z-index: 2;
+}
+
+#contain {
+  z-index: 1;
 }

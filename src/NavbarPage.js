@@ -5,29 +5,25 @@ MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavbarToggler, MDBCollap
 
 
 class NavbarPage extends Component {
-state = {
-  isOpen: false
-};
+  state = {
+    isOpen: false
+  };
 
-toggleCollapse = () => {
-  this.setState({ isOpen: !this.state.isOpen });
-}
+  toggleCollapse = () => {
+    this.setState({ isOpen: !this.state.isOpen });
+  }
 
-render() {
-  return (
-      <MDBNavbar color="indigo" dark expand="md">
+  render() {
+    return (
+      <MDBNavbar id="navbar" color="indigo" dark expand="md">
         <MDBNavbarBrand>
           <strong className="white-text">Yelp 2.0</strong>
         </MDBNavbarBrand>
         <MDBNavbarToggler onClick={this.toggleCollapse} />
         <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
-          <MDBNavbarNav center>
+          <MDBNavbarNav center="true">
             <MDBNavItem>
-                <MDBFormInline waves>
-                    <div className="md-form my-0">
-                    <input className="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" />
-                    </div>
-                </MDBFormInline>
+                <SearchBar />
             </MDBNavItem>
           </MDBNavbarNav>
           <MDBNavbarNav right>
@@ -49,5 +45,38 @@ render() {
     );
   }
 }
+
+class SearchBar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {value: ''};
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+
+  handleSubmit(event) {
+    alert('A location was submitted: ' + this.state.value);
+    // this is where we would somehow change the state again.
+    // call yelps, set a new lat and long.... 
+    // 
+    event.preventDefault();
+  }
+
+  render() {
+    return (
+      <MDBFormInline waves onSubmit={this.handleSubmit}>
+        <div className="md-form my-0">
+          <input className="form-control mr-sm-2" value={this.state.value} onChange={this.handleChange} type="text" placeholder="Search" aria-label="Search" />
+        </div>
+      </MDBFormInline>
+    );
+  }
+}
+
 
 export default NavbarPage;

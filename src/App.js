@@ -6,9 +6,10 @@ import RestaurantCard from './RestaurantCard';
 export default class App extends Component {
     render() {
         return (
-        <div>
-            <NavbarPage id="navbar"/>
-            <Map />
+        <div id="container">
+            <NavbarPage />
+            <Map id="contain"/>
+            <RestaurantCard />
         </div>
         )
     }
