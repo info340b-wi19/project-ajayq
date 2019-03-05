@@ -1,56 +1,23 @@
 import React, { Component } from 'react';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
 import { uptime } from 'os';
-import axios from 'axios';
 
 let apiKey = 'TMcGNjy6GrtE3xc5EFSCuNfX202sXbkyE9yq2pguPydM5ajHiNEjp8nd7qdOhZgHCO8FFk2OtpEolPd-6iTMVsp_frK2N0tx2gc1NEH0EaloyEWx-BJs1bHXT7F9XHYx'
 
 export default class l extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            businesses : [],
-            lat: 37.787789124691,
-            long:-122.399305736113,
-        }
-        if (navigator.geolocation != undefined) {
-            navigator.geolocation.getCurrentPosition((position) => {
-                this.setState({lat:position.coords.latitude, long:position.coords.longitude});
-                this.yelpCall();
-            }); 
-        }
-    }
-
-    yelpCall = (event) => {
-        axios.get(`${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search?latitude=${this.state.lat}&longitude=${this.state.long}`, {
-            headers: {
-                Authorization: `Bearer ${apiKey}`
-            }
-        })
-        .then((res) => {
-            console.log("yelp call");
-            this.setState({
-                businesses: res.data.businesses
-            })
-        })
-        .catch((err) => {
-            console.log ('error')
-        })
-    } 
-
-
     render() {
+        console.log(this.props.lat)
         return (
             <div id='map'>
                 <Map 
                     style={{height: '100vh'}}
-                    center={[this.state.lat, this.state.long]}
-                    zoom={15}>
+                    center={[this.props.lat, this.props.long]}
+                    zoom={14.5}>
                         <TileLayer
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         // attribution=";http://osm.org/copyright&quot;>OpenStreetMap"
                         />
-                    <AllMarkers businessList={this.state.businesses}/>
+                    <AllMarkers businessList={this.props.businesses}/>
                 </Map>
             </div>
         )

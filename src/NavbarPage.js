@@ -4,10 +4,15 @@ MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavbarToggler, MDBCollap
 } from "mdbreact";
 
 
-class NavbarPage extends Component {
-  state = {
-    isOpen: false
-  };
+class NavbarPage extends Component { 
+  constructor(props) {
+    super(props);
+    this.state = {
+      isOpen: false,
+      func:this.props.func
+    };
+  
+  }
 
   toggleCollapse = () => {
     this.setState({ isOpen: !this.state.isOpen });
@@ -23,7 +28,7 @@ class NavbarPage extends Component {
         <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
           <MDBNavbarNav center="true">
             <MDBNavItem>
-                <SearchBar />
+                <SearchBar func={this.state.func}/>
             </MDBNavItem>
           </MDBNavbarNav>
           <MDBNavbarNav right>
@@ -49,7 +54,10 @@ class NavbarPage extends Component {
 class SearchBar extends Component {
   constructor(props) {
     super(props);
-    this.state = {value: ''};
+    this.state = {
+      value: '',
+      func:this.props.func
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -60,10 +68,10 @@ class SearchBar extends Component {
   }
 
   handleSubmit(event) {
-    alert('A location was submitted: ' + this.state.value);
     // this is where we would somehow change the state again.
     // call yelps, set a new lat and long.... 
     // 
+    this.state.func(this.state.value)
     event.preventDefault();
   }
 
@@ -74,6 +82,7 @@ class SearchBar extends Component {
           <input className="form-control mr-sm-2" value={this.state.value} onChange={this.handleChange} type="text" placeholder="Search" aria-label="Search" />
         </div>
       </MDBFormInline>
+
     );
   }
 }
