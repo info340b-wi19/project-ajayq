@@ -58,10 +58,6 @@ export default class l extends Component {
 }
 
 class MyMarker extends Component {
-    constructor(props) {
-        super(props);
-        // map state to props
-    }
     
     handleClick= (event) => {
         // this is where we will show the restaurant card
