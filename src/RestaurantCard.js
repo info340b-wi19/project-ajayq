@@ -15,22 +15,22 @@ class RestaurantCard extends Component {
     }; 
   }
 
-  yelpCall = (event) => {
-    axios.get(`${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search?latitude=${this.state.lat}&longitude=${this.state.long}`, {
-        headers: {
-            Authorization: `Bearer ${apiKey}`
-        },
-        params: {
-            categories: 'breakfast_brunch',
-        }
-    })
-    .then((res) => {
-        console.log(res)
-    })
-    .catch((err) => {
-        console.log ('error')
-    })
-}
+    yelpCall = (event) => {
+        axios.get(`${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search?latitude=${this.state.lat}&longitude=${this.state.long}`, {
+            headers: {
+                Authorization: `Bearer ${apiKey}`
+            },
+            params: {
+                categories: 'breakfast_brunch',
+            }
+        })
+        .then((res) => {
+            console.log(res)
+        })
+        .catch((err) => {
+            console.log ('error')
+        })
+    }
 
   //  getLocation() {
   //   if (navigator.geolocation != undefined) {

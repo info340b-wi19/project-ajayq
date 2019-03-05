@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import NavbarPage from './NavbarPage'
 import Map from './Map'
+import RestaurantCard from './RestaurantCard';
 
-class App extends Component {
+export default class App extends Component {
     render() {
         return (
         // <NavbarPage />
-        <Map />
+        //<Map />
+        ""
         )
     }
 }
