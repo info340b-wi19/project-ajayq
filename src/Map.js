@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
+import { uptime } from 'os';
 
-const TEST_YELP = {
+const TEST_YELP = [{
     "rating": 4,
     "price": "$$",
     "hours": [
@@ -83,7 +84,7 @@ const TEST_YELP = {
         "address1": "123 Second St",
         "zip_code": ""
     }
-}
+}]
 
 export default class l extends Component {
     render() {
@@ -91,13 +92,13 @@ export default class l extends Component {
             <div id='map'>
                 <Map 
                     style={{height: '100vh'}}
-                    center={[51.505, -0.09]}
-                    zoom={13}>
+                    center={[37.787789124691, -122.399305736113]}
+                    zoom={10}>
                         <TileLayer
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         // attribution=";http://osm.org/copyright&quot;>OpenStreetMap"
                         />
-                    <MyMarker />
+                    <AllMarkers businessList={TEST_YELP}/>
                 </Map>
             </div>
         )
@@ -105,11 +106,47 @@ export default class l extends Component {
 }
 
 class MyMarker extends Component {
+    constructor(props) {
+        super(props);
+        // map state to props
+    }
+    
+    handleClick= (event) => {
+        // this is where we will show the restaurant card
+        let business = this.props.business;
+        console.log(business.name);
+        // set state here in order to change the look of the card popup
+    }
+
+    handleHover = (event) => {
+        let business = this.props.business;
+        event.target.bindPopup(
+            business.name
+        );
+        event.target.on('mouseover', function (e) {
+            event.target.openPopup();
+        });
+        event.target.on('mouseout', function (e) {
+            event.target.closePopup();
+        });
+    }
+
     render() {
-        let lat  = this.props.coordinates.latitude;
-        let lon = this.props.coordinates.longitude;
-        return (<Marker position={[lat, lon]}>
-            <Popup>A pretty CSS3 popup.<br />Easily customizable.</Popup>
-        </Marker>)
+        let business = this.props.business;
+        let lat  = this.props.business.coordinates.latitude;
+        let lon = this.props.business.coordinates.longitude;
+        let mark = <Marker position={[lat, lon]} onClick={this.handleClick} onMouseover={this.handleHover}>
+        </Marker>;
+        return (mark)
+    }
+}
+
+class AllMarkers extends Component {
+    render() {
+        let businessList = this.props.businessList;
+        let businessMarkers = businessList.map((business) =>{
+            return <MyMarker business={business}/>
+        });
+        return(businessMarkers);
     }
 }
