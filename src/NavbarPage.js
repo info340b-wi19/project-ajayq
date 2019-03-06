@@ -79,7 +79,7 @@ class SearchBar extends Component {
     return (
       <MDBFormInline waves onSubmit={this.handleSubmit}>
         <div className="md-form my-0">
-          <input className="form-control mr-sm-2" value={this.state.value} onChange={this.handleChange} type="text" placeholder="Search" aria-label="Search" />
+          <input className="form-control mr-sm-2" value={this.state.value} onChange={this.handleChange} type="text" placeholder="Search Location" aria-label="Search" />
         </div>
       </MDBFormInline>
 
