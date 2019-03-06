@@ -1,15 +1,39 @@
 import React, { Component } from 'react';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
 import { uptime } from 'os';
+import  RestaurantCard  from './RestaurantCard'
 
-let apiKey = 'TMcGNjy6GrtE3xc5EFSCuNfX202sXbkyE9yq2pguPydM5ajHiNEjp8nd7qdOhZgHCO8FFk2OtpEolPd-6iTMVsp_frK2N0tx2gc1NEH0EaloyEWx-BJs1bHXT7F9XHYx'
 
 export default class l extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            doesShow:false,
+            business:[]
+        }
+    }
+
+    childSelected = (doesShow, business) => {
+        this.setState({
+            doesShow : doesShow,
+            business: business
+        })
+    }
+
+    hideCard = () => {
+        this.setState({
+            doesShow:false
+        })
+        console.log("test")
+    }
+
+
     render() {
         console.log(this.props.lat)
         return (
-            <div id='map'>
-                <Map 
+            <div >
+                <Map id='map'
                     style={{height: '100vh'}}
                     center={[this.props.lat, this.props.long]}
                     zoom={14.5}>
@@ -17,8 +41,9 @@ export default class l extends Component {
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         // attribution=";http://osm.org/copyright&quot;>OpenStreetMap"
                         />
-                    <AllMarkers businessList={this.props.businesses}/>
+                    <AllMarkers childSelected={this.childSelected} businessList={this.props.businesses} />
                 </Map>
+            {this.state.doesShow ? <RestaurantCard business={this.state.business} hideCard={this.hideCard}/>: null}
             </div>
         )
     }
@@ -26,10 +51,11 @@ export default class l extends Component {
 
 class MyMarker extends Component {
     
-    handleClick= (event) => {
-        // this is where we will show the restaurant card
+    // Handle click event listenener of each marker.
+    // Uses the childSelected function that it's passed to return the clicked businesses information
+    handleClick= (event) => {        
         let business = this.props.business;
-        console.log(business.name);
+        this.props.childSelected(true, business)
         // set state here in order to change the look of the card popup
     }
 
@@ -47,7 +73,6 @@ class MyMarker extends Component {
     }
 
     render() {
-        
         let business = this.props.business;
         let lat  = this.props.business.coordinates.latitude;
         let lon = this.props.business.coordinates.longitude;
@@ -61,7 +86,7 @@ class AllMarkers extends Component {
     render() {
         let businessList = this.props.businessList;
         let businessMarkers = businessList.map((business) =>{
-            return <MyMarker key={business.name} business={business}/>
+            return <MyMarker key={business.name} business={business} childSelected={this.props.childSelected}/>
         });
         return(businessMarkers);
     }

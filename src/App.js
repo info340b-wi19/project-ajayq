@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import NavbarPage from './NavbarPage'
 import Map from './Map'
-import RestaurantCard from './RestaurantCard';
 import axios from 'axios';
 
 
@@ -24,9 +23,10 @@ export default class App extends Component {
         
     }
  
-    changeState = (event) => {
+
+    changeState = (passedNavValue) => {
         this.setState({
-            navValue : event
+            navValue : passedNavValue
         }, () => {
             this.generalYelpCall(this.state.navValue)
         })
@@ -55,6 +55,7 @@ export default class App extends Component {
             }
         })
         .then((res) => {
+            console.log(res.data.businesses)
             this.setState({
                 businesses: res.data.businesses,
                 lat: res.data.region.center.latitude,
@@ -72,7 +73,6 @@ export default class App extends Component {
         <div id="container">
             <NavbarPage func={this.changeState}/>
             <Map navBarValue={this.state.navValue} id="contain" lat={this.state.lat} long={this.state.long} businesses={this.state.businesses}/>
-            <RestaurantCard />
         </div>
         )
     }
