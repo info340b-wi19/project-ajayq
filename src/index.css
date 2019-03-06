@@ -54,3 +54,36 @@ code {
 h4 {
   font-weight: 900;
 }
+
+#cardRow {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+#cardImg {
+  height: 30vh;
+}
+
+#card-body {
+  overflow: scroll;
+}
+
+.alert {
+  text-align: center;
+  position: absolute;
+  top: 4vh;
+  left: 0;
+  z-index: 10;
+  width: 100%;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 10;
+  text-align: right;
+  background-color: lightgray;
+}

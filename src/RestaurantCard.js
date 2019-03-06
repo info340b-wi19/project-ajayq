@@ -1,24 +1,13 @@
 import React, { Component } from 'react';
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol } from 'mdbreact';
 
-export default class RestaurantCard extends Component {
-
-  
+export default class RestaurantCard extends Component {  
     render() {
-        console.log(this.props.business);
         return (
           <MDBCol id="RestaurantCard">
-              <MDBCard style={{ 
-                  width: "100%", 
-                  height: "100%",
-                  display: "flex",
-                  "flex-direction": "row",
-                }}>
-                  <MDBCardImage style={{
-                      height:"20rem",
-                  }}
-                  className="img-fluid" src={this.props.business.image_url} waves />
-                      <MDBCardBody>
+              <MDBCard id="cardRow">
+                  <MDBCardImage id="cardImg" className="img-fluid" src={this.props.business.image_url} waves alt={this.props.business.name}/>
+                      <MDBCardBody id="card-body">
                           <MDBCardTitle>{this.props.business.name}</MDBCardTitle>
                               <MDBCardText>
                               Rating: {this.props.business.rating} ({this.props.business.review_count} reviews) <br />

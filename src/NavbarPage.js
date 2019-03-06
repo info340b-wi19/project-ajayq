@@ -24,7 +24,7 @@ class NavbarPage extends Component {
     return (
       <MDBNavbar id="navbar" color="indigo" dark expand="md">
         <MDBNavbarBrand>
-          <strong className="white-text">Yelp 2.0</strong>
+          <strong className="white-text">QuickStops</strong>
         </MDBNavbarBrand>
         <MDBNavbarToggler onClick={this.toggleCollapse} />
         <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>

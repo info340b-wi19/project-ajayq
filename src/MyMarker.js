@@ -23,7 +23,7 @@ export default class MyMarker extends Component {
                     "<h4>" + business.name + "</h4> <br>" +
                     "<h5>Rating: " + business.rating + " Price: " + business.price + "</h5>"
                 + "</div>"
-                + "<img src=\"" + business.image_url + "\"height=\"100\"\"width=\"100\">"
+                + "<img src=\"" + business.image_url + "\"height=\"100\"\"width=\"100\" alt=\""+ business.name +"\">"
             + "</div>"
         );
         event.target.on('mouseover', function (e) {

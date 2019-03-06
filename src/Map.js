@@ -43,7 +43,8 @@ export default class MyMap extends Component {
                 <Map id='map'
                     style={{height: '100vh'}}
                     center={[this.props.lat, this.props.long]}
-                    zoom={14.5}>
+                    zoom={14.5}
+                    role="Main">
                         <TileLayer
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                     {this.props.businesses.map((business) => {

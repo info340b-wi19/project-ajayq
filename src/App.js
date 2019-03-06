@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import NavbarPage from './NavbarPage'
 import Map from './Map'
 import axios from 'axios';
+import { MDBAlert } from 'mdbreact';
 
 
 export default class App extends Component {
@@ -14,6 +15,7 @@ export default class App extends Component {
             businesses : [],
             lat: 37.787789124691,
             long:-122.399305736113,
+            addAlert:false
         }; 
         if (navigator.geolocation !== undefined) {
             navigator.geolocation.getCurrentPosition((position) => {
@@ -49,6 +51,7 @@ export default class App extends Component {
             })
         })
         .catch((err) => {
+
         })
     } 
 
@@ -71,15 +74,34 @@ export default class App extends Component {
             })
         })
         .catch((err) => {
+            this.setState({
+                addAlert:true
+            })
         })
     } 
 
+    // Removes the alert by setting the addAlert state to false
+    dismissAlert() {
+        this.setState({
+            addAlert:false
+        })
+    }
 
     render() {
         return (
         <div id="container">
             <NavbarPage func={this.changeState}/>
+            {
+                this.state.addAlert ? 
+                    <div onClick={() => {this.dismissAlert()}}>
+                        <MDBAlert color="danger" dismiss>
+                            Failed location search. Check your internet connection.
+                        </MDBAlert>
+                    </div> 
+                    : null
+            }
             <Map navBarValue={this.state.navValue} id="contain" lat={this.state.lat} long={this.state.long} businesses={this.state.businesses}/>
+            <footer role="contentinfo">© 2018 Copyright: Quickstops</footer>
         </div>
         )
     }
