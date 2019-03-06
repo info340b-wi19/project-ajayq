@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
-import { uptime } from 'os';
+import { Map, Marker, TileLayer } from 'react-leaflet'
 import  RestaurantCard  from './RestaurantCard'
 
 
@@ -61,8 +60,14 @@ class MyMarker extends Component {
 
     handleHover = (event) => {
         let business = this.props.business;
-        event.target.bindPopup(
-            business.name
+        event.target.bindPopup( 
+            "<div id=\"flex\">" +
+                "<div>" +
+                    "<h4>" + business.name + "</h4>" + "<br>" +
+                    "<h5>Rating: " + business.rating + " Price: " + business.price + "</h5>"
+                + "</div>"
+                + "<img src=\"" + business.image_url + "\"height=\"100\"" + "\"width=\"100\">"
+            + "</div>"
         );
         event.target.on('mouseover', function (e) {
             event.target.openPopup();
@@ -73,7 +78,6 @@ class MyMarker extends Component {
     }
 
     render() {
-        let business = this.props.business;
         let lat  = this.props.business.coordinates.latitude;
         let lon = this.props.business.coordinates.longitude;
         let mark = <Marker position={[lat, lon]} onClick={this.handleClick} onMouseover={this.handleHover}>

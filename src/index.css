@@ -45,3 +45,11 @@ code {
 #contain {
   z-index: 1;
 }
+
+#flex {
+  display: flex;
+}
+
+h4 {
+  font-weight: 900;
+}
