@@ -5,6 +5,7 @@ export default class RestaurantCard extends Component {
 
   
     render() {
+        console.log(this.props.business);
         return (
           <MDBCol id="RestaurantCard">
               <MDBCard style={{ 
@@ -21,7 +22,9 @@ export default class RestaurantCard extends Component {
                           <MDBCardTitle>{this.props.business.name}</MDBCardTitle>
                               <MDBCardText>
                               Rating: {this.props.business.rating} ({this.props.business.review_count} reviews) <br />
-                              {this.props.business.price} | {this.props.business.categories.title}
+                              {this.props.business.price} | {this.props.business.categories[0].title} <br /><br />
+                              {this.props.business.location.address1}<br />
+                              {this.props.business.location.city}, {this.props.business.location.state} {this.props.business.location.zip_code}
                           </MDBCardText>
                       <MDBBtn onClick={this.props.hideCard}>Hide business</MDBBtn>
                   </MDBCardBody>
