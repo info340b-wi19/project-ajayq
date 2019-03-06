@@ -25,6 +25,7 @@ export default class MyMap extends Component {
             doesShowCard: doesShowCard,
             business: business
         })
+        console.log(this.state)
     }
 
     // A function which is passed to the cards so that they can change the
@@ -49,7 +50,7 @@ export default class MyMap extends Component {
                         return <MyMarker key={business.name} business={business} childSelected={this.childSelected}/>
                     })}
                 </Map>
-                {this.state.doesShow ? <RestaurantCard business={this.state.business} hideCard={this.hideCard}/>: null}
+                {this.state.doesShowCard ? <RestaurantCard business={this.state.business} hideCard={this.hideCard}/>: null}
             </div>
         )
     }
