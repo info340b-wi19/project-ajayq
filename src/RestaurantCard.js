@@ -7,13 +7,21 @@ export default class RestaurantCard extends Component {
     render() {
         return (
           <MDBCol id="RestaurantCard">
-              <MDBCard style={{ width: "22rem" }}>
-                  <MDBCardImage className="img-fluid" src={this.props.business.image_url} waves />
+              <MDBCard style={{ 
+                  width: "100%", 
+                  height: "100%",
+                  display: "flex",
+                  "flex-direction": "row",
+                }}>
+                  <MDBCardImage style={{
+                      height:"20rem",
+                  }}
+                  className="img-fluid" src={this.props.business.image_url} waves />
                       <MDBCardBody>
                           <MDBCardTitle>{this.props.business.name}</MDBCardTitle>
                               <MDBCardText>
-                              Some quick example text to build on the card title and make
-                              up the bulk of the card&apos;s content.
+                              Rating: {this.props.business.rating} ({this.props.business.review_count} reviews) <br />
+                              {this.props.business.price} | {this.props.business.categories.title}
                           </MDBCardText>
                       <MDBBtn onClick={this.props.hideCard}>Hide business</MDBBtn>
                   </MDBCardBody>
