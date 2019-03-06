@@ -3,7 +3,8 @@ import {
 MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavbarToggler, MDBCollapse, MDBFormInline,
 } from "mdbreact";
 
-
+// Constructs a navbar
+// Expects a function which allows the navbar to change the state of the map.
 class NavbarPage extends Component { 
   constructor(props) {
     super(props);
@@ -14,6 +15,7 @@ class NavbarPage extends Component {
   
   }
 
+  // toggles the collapsable part of the navbar when the screen is a smaller size.
   toggleCollapse = () => {
     this.setState({ isOpen: !this.state.isOpen });
   }
@@ -51,6 +53,9 @@ class NavbarPage extends Component {
   }
 }
 
+// The SearchBar is a componenet of the navbar which preforms one of our main functionalities.
+// It has a state which includes the current value inside the search bar and a function 
+// which allows it to change the maps state.
 class SearchBar extends Component {
   constructor(props) {
     super(props);
