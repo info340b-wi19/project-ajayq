@@ -75,8 +75,8 @@ export default class App extends Component {
     // this function updates the state and takes in a location argument which was originally from the navbar
     // updates the latitude and longitude based on the yelp api response
     generalYelpCall = (arg) => {
-        axios.get(`${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search?latitude=${this.state.lat}
-        &longitude=${this.state.long}&categories=${this.state.category}&price=${this.state.price}&radius=${this.state.distance}&limit=${this.state.limit}`, {
+        console.log(`https://api.yelp.com/v3/businesses/search?location=${this.state.navValue}&categories=${this.state.category}&price=${this.state.price}&radius=${this.state.distance}&limit=${this.state.limit}`);
+        axios.get(`${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search?location=${this.state.navValue}&categories=${this.state.category}&price=${this.state.price}&radius=${this.state.distance}&limit=${this.state.limit}`, {
             headers: {
                 Authorization: `Bearer ${apiKey}`
             }
