@@ -28,10 +28,50 @@ class NavbarPage extends Component {
         </MDBNavbarBrand>
         <MDBNavbarToggler onClick={this.toggleCollapse} />
         <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
-          <MDBNavbarNav center="true">
+          <MDBNavbarNav center="true" className="white-text">
+
             <MDBNavItem>
                 <SearchBar func={this.state.func}/>
             </MDBNavItem>
+            <MDBNavItem>
+              <select class="browser-default custom-select" name="category"  onChange={this.props.handleSelect}>
+                <option value="" selected>Category</option>
+                <option value="Bar">Bar</option>
+                <option value="Restaurant">Restaurant</option>
+              </select>
+            </MDBNavItem>
+            <MDBNavItem>
+              <select class="browser-default custom-select" name="distance"  onChange={this.props.handleSelect}>
+                <option value="40000" selected>Distance</option>
+                <option value="1609">Walking (1 mile)</option>
+                <option value="3218">Biking (2 miles)</option>
+                <option value="8046">Driving (5 miles)</option>
+              </select>
+            </MDBNavItem>
+
+            <MDBNavItem >
+              <div class="custom-control custom-checkbox custom-control-inline">
+                <input type="checkbox" class="custom-control-input" id="defaultInline1"/>
+                <label class="custom-control-label" for="defaultInline1">$</label>
+              </div>
+
+              <div class="custom-control custom-checkbox custom-control-inline">
+                <input type="checkbox" class="custom-control-input" id="defaultInline2"/>
+                <label class="custom-control-label" for="defaultInline2">$$</label>
+              </div>
+
+              <div class="custom-control custom-checkbox custom-control-inline">
+                <input type="checkbox" class="custom-control-input" id="defaultInline3"/>
+                <label class="custom-control-label" for="defaultInline3">$$$</label>
+              </div>
+
+              <div class="custom-control custom-checkbox custom-control-inline">
+                <input type="checkbox" class="custom-control-input" id="defaultInline3"/>
+                <label class="custom-control-label" for="defaultInline4">$$$$</label>
+              </div>
+            </MDBNavItem>
+            
+
           </MDBNavbarNav>
           <MDBNavbarNav right>
           <MDBNavItem>

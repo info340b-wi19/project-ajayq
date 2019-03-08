@@ -92,3 +92,8 @@ footer {
   text-align: right;
   background-color: lightgray;
 }
+
+.nav-item {
+  display: flex;
+  align-items: center;
+}

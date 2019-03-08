@@ -14,9 +14,14 @@ export default class App extends Component {
             navValue: "",
             businesses: [],
             lat: 37.787789124691,
-            long: -122.399305736113,
-            addAlert: false
-        };
+            long:-122.399305736113,
+            addAlert:false,
+            category: "",
+            price: "1",
+            distance: 10000,
+            limit:20,
+        }; 
+
         if (navigator.geolocation !== undefined) {
             navigator.geolocation.getCurrentPosition((position) => {
                 this.setState({ lat: position.coords.latitude, long: position.coords.longitude });
@@ -36,11 +41,21 @@ export default class App extends Component {
         })
     }
 
+    handleSelect = (evt) => {
+        evt.preventDefault();
+        let selectName = evt.target.name;
+        let selectedValue = evt.target.value;
+        this.setState({ [selectName]: selectedValue }, () => {
+            this.generalYelpCall(this.state.navValue)
+        })
+      }
+
     // Preforms a yelp api fetch, look at the other yelp call for our reasoning on the different fetch
     // sets the state of the businesses within the location.
     // uses the current state's latitude and longitude.
     yelpCall = () => {
-        axios.get(`${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search?latitude=${this.state.lat}&longitude=${this.state.long}`, {
+        axios.get(`${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search?latitude=${this.state.lat}
+        &longitude=${this.state.long}&categories=${this.state.category}&price=${this.state.price}&radius=${this.state.distance}&limit=${this.state.limit}`, {
             headers: {
                 Authorization: `Bearer ${apiKey}`
             }
@@ -61,24 +76,29 @@ export default class App extends Component {
     // this function updates the state and takes in a location argument which was originally from the navbar
     // updates the latitude and longitude based on the yelp api response
     generalYelpCall = (arg) => {
-        axios.get(`${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search?location=${arg}`, {
+        axios.get(`${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search?latitude=${this.state.lat}
+        &longitude=${this.state.long}&categories=${this.state.category}&price=${this.state.price}&radius=${this.state.distance}&limit=${this.state.limit}`, {
             headers: {
                 Authorization: `Bearer ${apiKey}`
             }
         })
-            .then((res) => {
-                this.setState({
-                    businesses: res.data.businesses,
-                    lat: res.data.region.center.latitude,
-                    long: res.data.region.center.longitude
-                })
+
+        .then((res) => {
+            this.setState({
+                businesses: res.data.businesses,
+                lat: res.data.region.center.latitude,
+                long: res.data.region.center.longitude
+            }, () => {
+                console.log(this.state);
             })
+        })
             .catch((err) => {
                 this.setState({
                     addAlert: true
                 })
             })
-    }
+    
+}
 
     // Removes the alert by setting the addAlert state to false
     dismissAlert() {
@@ -89,14 +109,13 @@ export default class App extends Component {
 
     render() {
         return (
-
-            <div id="container">
-                <NavbarPage func={this.changeState} />
-                {
-                    this.state.addAlert ?
-                        <div onClick={() => { this.dismissAlert() }}>
-                            <MDBAlert color="danger" dismiss>
-                                Failed location search. Check your internet connection.
+        <div id="container">
+            <NavbarPage func={this.changeState} handleSelect={this.handleSelect}/>
+            {
+                this.state.addAlert ? 
+                    <div onClick={() => {this.dismissAlert()}}>
+                        <MDBAlert color="danger" dismiss>
+                            Failed location search. Check your internet connection.
                         </MDBAlert>
                         </div>
                         : null
