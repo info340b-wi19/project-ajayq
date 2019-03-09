@@ -17,7 +17,7 @@ export default class App extends Component {
             long:-122.399305736113,
             addAlert:false,
             category: "",
-            price: "1",
+            price: "1,2,3,4",
             distance: 10000,
             limit:20,
         }; 
@@ -46,7 +46,7 @@ export default class App extends Component {
         let selectName = evt.target.name;
         let selectedValue = evt.target.value;
         this.setState({ [selectName]: selectedValue }, () => {
-            this.generalYelpCall(this.state.navValue)
+            this.yelpCall()
         })
       }
 
@@ -54,8 +54,10 @@ export default class App extends Component {
     // sets the state of the businesses within the location.
     // uses the current state's latitude and longitude.
     yelpCall = () => {
-        axios.get(`${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search?latitude=${this.state.lat}
-        &longitude=${this.state.long}&categories=${this.state.category}&price=${this.state.price}&radius=${this.state.distance}&limit=${this.state.limit}`, {
+        console.log(this.state.category);
+        let url = `https://api.yelp.com/v3/businesses/search?latitude=${this.state.lat}&longitude=${this.state.long}${this.state.category != "" ? "&categories=" + this.state.category : ""}&price=${this.state.price}&radius=${this.state.distance}&limit=${this.state.limit}`;
+        console.log(url)
+        axios.get(`${'https://cors-anywhere.herokuapp.com/'}`+url, {
             headers: {
                 Authorization: `Bearer ${apiKey}`
             }
@@ -66,7 +68,7 @@ export default class App extends Component {
                 })
             })
             .catch((err) => {
-
+                console.log(err);
             })
     }
 
@@ -76,8 +78,8 @@ export default class App extends Component {
     // this function updates the state and takes in a location argument which was originally from the navbar
     // updates the latitude and longitude based on the yelp api response
     generalYelpCall = (arg) => {
-        console.log(`https://api.yelp.com/v3/businesses/search?location=${this.state.navValue}&categories=${this.state.category}&price=${this.state.price}&radius=${this.state.distance}&limit=${this.state.limit}`);
-        axios.get(`${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search?location=${this.state.navValue}&categories=${this.state.category}&price=${this.state.price}&radius=${this.state.distance}&limit=${this.state.limit}`, {
+        console.log(`https://api.yelp.com/v3/businesses/search?location=${this.state.navValue}${this.state.category == "" ? "" : "&categories="+ this.state.category}&price=${this.state.price}&radius=${this.state.distance}&limit=${this.state.limit}`);
+        axios.get(`${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search?location=${this.state.navValue}${this.state.category == "" ? "" : "&categories="+ this.state.category}&price=${this.state.price}&radius=${this.state.distance}&limit=${this.state.limit}`, {
             headers: {
                 Authorization: `Bearer ${apiKey}`
             }

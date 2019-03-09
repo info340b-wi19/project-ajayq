@@ -36,8 +36,8 @@ class NavbarPage extends Component {
             <MDBNavItem>
               <select class="browser-default custom-select" name="category"  onChange={this.props.handleSelect}>
                 <option value="" selected>Category</option>
-                <option value="Bar">Bar</option>
-                <option value="Restaurant">Restaurant</option>
+                <option value="bars">Bar</option>
+                <option value="restaurants">Restaurant</option>
               </select>
             </MDBNavItem>
             <MDBNavItem>
