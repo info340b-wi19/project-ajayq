@@ -36,7 +36,7 @@ export default class App extends Component {
         this.setState({
             navValue : passedNavValue
         }, () => {
-            this.generalYelpCall(this.state.navValue)
+            this.generalYelpCall()
         })
     }
 
@@ -45,7 +45,7 @@ export default class App extends Component {
         let selectName = evt.target.name;
         let selectedValue = evt.target.value;
         this.setState({ [selectName]: selectedValue }, () => {
-            this.generalYelpCall(this.state.navValue)
+            this.yelpCall()
         })
       }
 
@@ -74,7 +74,7 @@ export default class App extends Component {
     // not best practice... especially sending private keys through another site
     // this function updates the state and takes in a location argument which was originally from the navbar
     // updates the latitude and longitude based on the yelp api response
-    generalYelpCall = (arg) => {
+    generalYelpCall = () => {
         console.log(`https://api.yelp.com/v3/businesses/search?location=${this.state.navValue}&categories=${this.state.category}&price=${this.state.price}&radius=${this.state.distance}&limit=${this.state.limit}`);
         axios.get(`${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search?location=${this.state.navValue}&categories=${this.state.category}&price=${this.state.price}&radius=${this.state.distance}&limit=${this.state.limit}`, {
             headers: {
