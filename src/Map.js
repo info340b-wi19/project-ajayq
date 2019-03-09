@@ -25,7 +25,6 @@ export default class MyMap extends Component {
             doesShowCard: doesShowCard,
             business: business
         })
-        console.log(this.state)
     }
 
     // A function which is passed to the cards so that they can change the
@@ -34,7 +33,6 @@ export default class MyMap extends Component {
         this.setState({
             doesShowCard:false
         })
-        console.log("test")
     }
 
     render() {

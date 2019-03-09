@@ -34,14 +34,14 @@ class NavbarPage extends Component {
                 <SearchBar func={this.state.func}/>
             </MDBNavItem>
             <MDBNavItem>
-              <select class="browser-default custom-select" name="category"  onChange={this.props.handleSelect}>
+              <select className="browser-default custom-select" name="category"  onChange={this.props.handleSelect}>
                 <option value="" selected>Category</option>
                 <option value="bars">Bar</option>
                 <option value="restaurants">Restaurant</option>
               </select>
             </MDBNavItem>
             <MDBNavItem>
-              <select class="browser-default custom-select" name="distance"  onChange={this.props.handleSelect}>
+              <select className="browser-default custom-select" name="distance"  onChange={this.props.handleSelect}>
                 <option value="40000" selected>Distance</option>
                 <option value="1609">Walking (1 mile)</option>
                 <option value="3218">Biking (2 miles)</option>
@@ -50,25 +50,13 @@ class NavbarPage extends Component {
             </MDBNavItem>
 
             <MDBNavItem >
-              <div class="custom-control custom-checkbox custom-control-inline">
-                <input type="checkbox" class="custom-control-input" id="defaultInline1"/>
-                <label class="custom-control-label" for="defaultInline1">$</label>
-              </div>
-
-              <div class="custom-control custom-checkbox custom-control-inline">
-                <input type="checkbox" class="custom-control-input" id="defaultInline2"/>
-                <label class="custom-control-label" for="defaultInline2">$$</label>
-              </div>
-
-              <div class="custom-control custom-checkbox custom-control-inline">
-                <input type="checkbox" class="custom-control-input" id="defaultInline3"/>
-                <label class="custom-control-label" for="defaultInline3">$$$</label>
-              </div>
-
-              <div class="custom-control custom-checkbox custom-control-inline">
-                <input type="checkbox" class="custom-control-input" id="defaultInline3"/>
-                <label class="custom-control-label" for="defaultInline4">$$$$</label>
-              </div>
+              
+              <form onChange={this.props.handleCheckBoxChange} name="price">
+                <label className="checkbox-inline"><input type="checkbox" value="1"/>$</label>
+                <label className="checkbox-inline"><input type="checkbox" value="2" />$$</label>
+                <label className="checkbox-inline"><input type="checkbox" value="3" />$$$</label>
+                <label className="checkbox-inline"><input type="checkbox" value="4" />$$$$</label>
+              </form>
             </MDBNavItem>
             
 

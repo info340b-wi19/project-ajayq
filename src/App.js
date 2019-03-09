@@ -17,7 +17,7 @@ export default class App extends Component {
             long:-122.399305736113,
             addAlert:false,
             category: "",
-            price: "1,2,3,4",
+            price: "",
             distance: 10000,
             limit:20,
         }; 
@@ -25,7 +25,7 @@ export default class App extends Component {
         if (navigator.geolocation !== undefined) {
             navigator.geolocation.getCurrentPosition((position) => {
                 this.setState({ lat: position.coords.latitude, long: position.coords.longitude });
-                this.yelpCall();
+                this.yelpCallWithCoordinates();
             });
         }
 
@@ -37,7 +37,7 @@ export default class App extends Component {
         this.setState({
             navValue: passedNavValue
         }, () => {
-            this.generalYelpCall(this.state.navValue)
+            this.yelpCallWithLocation(this.state.navValue)
         })
     }
 
@@ -46,17 +46,36 @@ export default class App extends Component {
         let selectName = evt.target.name;
         let selectedValue = evt.target.value;
         this.setState({ [selectName]: selectedValue }, () => {
-            this.yelpCall()
+            this.yelpCallWithCoordinates();
         })
-      }
+    }
+
+
+    handleCheckBoxChange = (event) => {
+        let oldPrice = this.state.price == "" ? [] : this.state.price.split(",");
+        if (oldPrice.includes(event.target.value)) {
+            let index = oldPrice.indexOf(event.target.value);
+            oldPrice.splice(index,1);
+        } else {
+            oldPrice.push(event.target.value);
+        }
+        // let newPriceString = "";
+        // for (let index = 0; index < oldPrice.length - 1; index++) {
+        //     newPriceString += oldPrice[index] + ",";
+        // }
+        // newPriceString += oldPrice[oldPrice.length];
+        this.setState({ price : oldPrice.toString() }, () => {
+            this.yelpCallWithCoordinates();
+        })
+    }
 
     // Preforms a yelp api fetch, look at the other yelp call for our reasoning on the different fetch
     // sets the state of the businesses within the location.
     // uses the current state's latitude and longitude.
-    yelpCall = () => {
-        console.log(this.state.category);
-        let url = `https://api.yelp.com/v3/businesses/search?latitude=${this.state.lat}&longitude=${this.state.long}${this.state.category != "" ? "&categories=" + this.state.category : ""}&price=${this.state.price}&radius=${this.state.distance}&limit=${this.state.limit}`;
-        console.log(url)
+    yelpCallWithCoordinates = () => {
+        let url = `https://api.yelp.com/v3/businesses/search?latitude=${this.state.lat}
+        &longitude=${this.state.long}${this.state.category != "" ? "&categories=" + this.state.category : ""}
+        ${this.state.price != "" ? "&price=" + this.state.price : ""}&radius=${this.state.distance}&limit=${this.state.limit}`;
         axios.get(`${'https://cors-anywhere.herokuapp.com/'}`+url, {
             headers: {
                 Authorization: `Bearer ${apiKey}`
@@ -68,7 +87,9 @@ export default class App extends Component {
                 })
             })
             .catch((err) => {
-                console.log(err);
+                this.setState({
+                    addAlert: true
+                })
             })
     }
 
@@ -77,9 +98,11 @@ export default class App extends Component {
     // not best practice... especially sending private keys through another site
     // this function updates the state and takes in a location argument which was originally from the navbar
     // updates the latitude and longitude based on the yelp api response
-    generalYelpCall = (arg) => {
-        console.log(`https://api.yelp.com/v3/businesses/search?location=${this.state.navValue}${this.state.category == "" ? "" : "&categories="+ this.state.category}&price=${this.state.price}&radius=${this.state.distance}&limit=${this.state.limit}`);
-        axios.get(`${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search?location=${this.state.navValue}${this.state.category == "" ? "" : "&categories="+ this.state.category}&price=${this.state.price}&radius=${this.state.distance}&limit=${this.state.limit}`, {
+    yelpCallWithLocation = (arg) => {
+        axios.get(`${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search?location=${this.state.navValue}
+        ${this.state.category == "" ? "" : "&categories="+ this.state.category}
+        ${this.state.price != "" ? "&price=" + this.state.price : ""}
+        &radius=${this.state.distance}&limit=${this.state.limit}`, {
             headers: {
                 Authorization: `Bearer ${apiKey}`
             }
@@ -91,7 +114,6 @@ export default class App extends Component {
                 lat: res.data.region.center.latitude,
                 long: res.data.region.center.longitude
             }, () => {
-                console.log(this.state);
             })
         })
             .catch((err) => {
@@ -112,7 +134,7 @@ export default class App extends Component {
     render() {
         return (
         <div id="container">
-            <NavbarPage func={this.changeState} handleSelect={this.handleSelect}/>
+            <NavbarPage func={this.changeState} handleSelect={this.handleSelect} handleCheckBoxChange={this.handleCheckBoxChange}/>
             {
                 this.state.addAlert ? 
                     <div onClick={() => {this.dismissAlert()}}>
