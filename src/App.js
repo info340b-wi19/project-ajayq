@@ -78,7 +78,6 @@ export default class App extends Component {
         `&longitude=${this.state.long}` +
         `${this.state.term != "" ? "&term=" + this.state.term : ""}` +
         `${this.state.price != "" ? "&price=" + this.state.price : ""}&radius=${this.state.distance}&limit=${this.state.limit}`;
-        console.log(url);
         axios.get(`${'https://cors-anywhere.herokuapp.com/'}`+url, {
             headers: {
                 Authorization: `Bearer ${apiKey}`
@@ -87,7 +86,7 @@ export default class App extends Component {
             .then((res) => {
                 this.setState({
                     businesses: res.data.businesses
-                }, console.log(this.state))
+                })
             })
             .catch((err) => {
                 this.setState({
