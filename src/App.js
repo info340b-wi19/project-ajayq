@@ -16,7 +16,7 @@ export default class App extends Component {
             lat: 37.787789124691,
             long:-122.399305736113,
             addAlert:false,
-            category: "",
+            term: "",
             price: "",
             distance: 10000,
             limit:20,
@@ -73,9 +73,12 @@ export default class App extends Component {
     // sets the state of the businesses within the location.
     // uses the current state's latitude and longitude.
     yelpCallWithCoordinates = () => {
-        let url = `https://api.yelp.com/v3/businesses/search?latitude=${this.state.lat}
-        &longitude=${this.state.long}${this.state.category != "" ? "&categories=" + this.state.category : ""}
-        ${this.state.price != "" ? "&price=" + this.state.price : ""}&radius=${this.state.distance}&limit=${this.state.limit}`;
+        let url = `https://api.yelp.com/v3/businesses/search?` +
+        `latitude=${this.state.lat}` +
+        `&longitude=${this.state.long}` +
+        `${this.state.term != "" ? "&term=" + this.state.term : ""}` +
+        `${this.state.price != "" ? "&price=" + this.state.price : ""}&radius=${this.state.distance}&limit=${this.state.limit}`;
+        console.log(url);
         axios.get(`${'https://cors-anywhere.herokuapp.com/'}`+url, {
             headers: {
                 Authorization: `Bearer ${apiKey}`
@@ -84,7 +87,7 @@ export default class App extends Component {
             .then((res) => {
                 this.setState({
                     businesses: res.data.businesses
-                })
+                }, console.log(this.state))
             })
             .catch((err) => {
                 this.setState({
@@ -100,7 +103,7 @@ export default class App extends Component {
     // updates the latitude and longitude based on the yelp api response
     yelpCallWithLocation = (arg) => {
         axios.get(`${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search?location=${this.state.navValue}
-        ${this.state.category == "" ? "" : "&categories="+ this.state.category}
+        ${this.state.term == "" ? "" : "&term="+ this.state.term}
         ${this.state.price != "" ? "&price=" + this.state.price : ""}
         &radius=${this.state.distance}&limit=${this.state.limit}`, {
             headers: {

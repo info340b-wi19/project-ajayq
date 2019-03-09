@@ -34,10 +34,13 @@ class NavbarPage extends Component {
                 <SearchBar func={this.state.func}/>
             </MDBNavItem>
             <MDBNavItem>
-              <select className="browser-default custom-select" name="category"  onChange={this.props.handleSelect}>
+              <select className="browser-default custom-select" name="term"  onChange={this.props.handleSelect}>
                 <option value="" selected>Category</option>
-                <option value="bars">Bar</option>
+                <option value="brewery">Brewery</option>
                 <option value="restaurants">Restaurant</option>
+                <option value="breakfast">Breakfast</option>
+                <option value="ice cream">Ice Cream</option>
+
               </select>
             </MDBNavItem>
             <MDBNavItem>

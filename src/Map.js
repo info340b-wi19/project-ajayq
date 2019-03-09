@@ -45,8 +45,9 @@ export default class MyMap extends Component {
                     role="Main">
                         <TileLayer
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-                    {this.props.businesses.map((business) => {
-                        return <MyMarker key={business.name} business={business} childSelected={this.childSelected}/>
+                    {
+                        this.props.businesses.map((business) => {
+                            return <MyMarker key={business.id} business={business} childSelected={this.childSelected}/>
                     })}
                 </Map>
                 {this.state.doesShowCard ? <RestaurantCard business={this.state.business} hideCard={this.hideCard}/>: null}
