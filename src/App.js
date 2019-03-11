@@ -110,6 +110,7 @@ export default class App extends Component {
     render() {
         return (
         <div id="container">
+        
             <NavbarPage func={this.changeState} handleSelect={this.handleSelect}/>
             {
                 this.state.addAlert ? 

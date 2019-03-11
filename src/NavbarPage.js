@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import {
 MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavbarToggler, MDBCollapse, MDBFormInline,
 } from "mdbreact";
+import {NavLink} from 'react-router-dom';
+// import About from './About';
 
 // Constructs a navbar
 // Expects a function which allows the navbar to change the state of the map.
@@ -75,13 +77,13 @@ class NavbarPage extends Component {
           </MDBNavbarNav>
           <MDBNavbarNav right>
           <MDBNavItem>
-                <a href="about.html" className="nav-link">Recent</a>
+                <a href = '/' className="nav-link">Recent</a>
             </MDBNavItem>
             <MDBNavItem>
                 <a href="about.html" className="nav-link">Saved</a>
             </MDBNavItem>
           <MDBNavItem>
-                <a href="about.html" className="nav-link">About</a>
+                <NavLink to ='/'className="nav-link">About</NavLink>
             </MDBNavItem>
             <MDBNavItem>
                 <a href="about.html" className="nav-link text-nowrap">Sign In</a>
