@@ -7,7 +7,7 @@ import foodMain from './img/foodtable.jpg'
 import Image from 'react-bootstrap/Image';
 //import Route from './Route';
 import {
-    MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavbarToggler, MDBCollapse, MDBFormInline,
+    MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavbarToggler, MDBCollapse, 
 } from "mdbreact";
 
 // import App from './App'
@@ -122,7 +122,7 @@ class AboutPage extends Component {
                     <h1>Meet Our Team</h1>
                     <div className="flex-container">
                         <div className="card id-card">
-                            <img className="card-img-top cardImg" src={kathy} />
+                            <img className="card-img-top cardImg" src={kathy} alt="Kathy"/>
                             <div className="card-body">
                                 <h2 className="card-title">Kathy Tran</h2>
                                 <p className="card-text">
@@ -133,7 +133,7 @@ class AboutPage extends Component {
                         </div>
 
                         <div className="card id-card">
-                            <img className="card-img-top cardImg" src={jv} />
+                            <img className="card-img-top cardImg" src={jv} alt="JV" />
                             <div className="card-body">
                                 <h2 className="card-title">JV Yeom</h2>
                                 <p className="card-text">
@@ -144,7 +144,7 @@ class AboutPage extends Component {
                         </div>
 
                         <div className="card id-card">
-                            <img className="card-img-top cardImg" src={ajay} />
+                            <img className="card-img-top cardImg" src={ajay} alt="Ajay"/>
                             <div className="card-body">
                                 <h2 className="card-title">Ajay Qi</h2>
                                 <p className="card-text">
@@ -155,11 +155,11 @@ class AboutPage extends Component {
                         </div>
 
                         <div className="card id-card">
-                            <img className="card-img-top cardImg" src={matthew} />
+                            <img className="card-img-top cardImg" src={matthew} alt="Matthew"/>
                             <div className="card-body">
                                 <h2 className="card-title">Matthew Vogt</h2>
                                 <p className="card-text">
-                                    Matthew is junior Informatics student at the University of Washington. He is from Woodenville, WA and skydives on
+                                    Matthew is a junior Informatics student at the University of Washington. He is from Woodinville, WA and skydives on
                                     Tuesday afternoons.
                                     </p>
                             </div>
