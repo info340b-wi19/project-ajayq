@@ -25,7 +25,6 @@ export default class MyMap extends Component {
             doesShowCard: doesShowCard,
             business: business
         })
-        console.log(this.state)
     }
 
     // A function which is passed to the cards so that they can change the
@@ -34,7 +33,6 @@ export default class MyMap extends Component {
         this.setState({
             doesShowCard:false
         })
-        console.log("test")
     }
 
     render() {
@@ -47,8 +45,9 @@ export default class MyMap extends Component {
                     role="Main">
                         <TileLayer
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-                    {this.props.businesses.map((business) => {
-                        return <MyMarker key={business.name} business={business} childSelected={this.childSelected}/>
+                    {
+                        this.props.businesses.map((business) => {
+                            return <MyMarker key={business.id} business={business} childSelected={this.childSelected}/>
                     })}
                 </Map>
                 {this.state.doesShowCard ? <RestaurantCard business={this.state.business} hideCard={this.hideCard}/>: null}
