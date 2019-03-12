@@ -52,18 +52,13 @@ export default class App extends Component {
 
 
     handleCheckBoxChange = (event) => {
-        let oldPrice = this.state.price == "" ? [] : this.state.price.split(",");
+        let oldPrice = this.state.price === "" ? [] : this.state.price.split(",");
         if (oldPrice.includes(event.target.value)) {
             let index = oldPrice.indexOf(event.target.value);
             oldPrice.splice(index,1);
         } else {
             oldPrice.push(event.target.value);
         }
-        // let newPriceString = "";
-        // for (let index = 0; index < oldPrice.length - 1; index++) {
-        //     newPriceString += oldPrice[index] + ",";
-        // }
-        // newPriceString += oldPrice[oldPrice.length];
         this.setState({ price : oldPrice.toString() }, () => {
             this.yelpCallWithCoordinates();
         })
@@ -76,23 +71,24 @@ export default class App extends Component {
         let url = `https://api.yelp.com/v3/businesses/search?` +
         `latitude=${this.state.lat}` +
         `&longitude=${this.state.long}` +
-        `${this.state.term != "" ? "&term=" + this.state.term : ""}` +
-        `${this.state.price != "" ? "&price=" + this.state.price : ""}&radius=${this.state.distance}&limit=${this.state.limit}`;
+        `${this.state.term !== "" ? "&term=" + this.state.term : ""}` +
+        `${this.state.price !== "" ? "&price=" + this.state.price : ""}` +
+        `&radius=${this.state.distance}&limit=${this.state.limit}`;
         axios.get(`${'https://cors-anywhere.herokuapp.com/'}`+url, {
             headers: {
                 Authorization: `Bearer ${apiKey}`
             }
         })
-            .then((res) => {
-                this.setState({
-                    businesses: res.data.businesses
-                })
+        .then((res) => {
+            this.setState({
+                businesses: res.data.businesses
             })
-            .catch((err) => {
-                this.setState({
-                    addAlert: true
-                })
+        })
+        .catch((err) => {
+            this.setState({
+                addAlert: true
             })
+        })
     }
 
     // this function preforms fetches a response to yelp's api
@@ -102,8 +98,8 @@ export default class App extends Component {
     // updates the latitude and longitude based on the yelp api response
     yelpCallWithLocation = (arg) => {
         axios.get(`${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search?location=${this.state.navValue}
-        ${this.state.term == "" ? "" : "&term="+ this.state.term}
-        ${this.state.price != "" ? "&price=" + this.state.price : ""}
+        ${this.state.term === "" ? "" : "&term="+ this.state.term}
+        ${this.state.price !== "" ? "&price=" + this.state.price : ""}
         &radius=${this.state.distance}&limit=${this.state.limit}`, {
             headers: {
                 Authorization: `Bearer ${apiKey}`

@@ -37,7 +37,7 @@ class NavbarPage extends Component {
             </MDBNavItem>
             <MDBNavItem>
               <select className="browser-default custom-select" name="term"  onChange={this.props.handleSelect}>
-                <option value="" selected>Category</option>
+                <option value="" >Category</option>
                 <option value="brewery">Brewery</option>
                 <option value="restaurants">Restaurant</option>
                 <option value="breakfast">Breakfast</option>
@@ -47,7 +47,7 @@ class NavbarPage extends Component {
             </MDBNavItem>
             <MDBNavItem>
               <select className="browser-default custom-select" name="distance"  onChange={this.props.handleSelect}>
-                <option value="40000" selected>Distance</option>
+                <option value="10000">Distance</option>
                 <option value="1609">Walking (1 mile)</option>
                 <option value="3218">Biking (2 miles)</option>
                 <option value="8046">Driving (5 miles)</option>

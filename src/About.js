@@ -11,7 +11,7 @@ import {
 } from "mdbreact";
 
 // import App from './App'
-import { Route, Switch, NavLink } from 'react-router-dom'
+import { Route, Switch, NavLink, Redirect } from 'react-router-dom'
 import App from './App.js';
 
 export default class About extends Component {
@@ -20,6 +20,7 @@ export default class About extends Component {
             <Switch>
                 <Route exact path='/' component={AboutPage} />
                 <Route exact path='/find' component={App} />
+                <Redirect to="/"/>
             </Switch>
         )
     }
