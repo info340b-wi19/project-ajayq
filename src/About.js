@@ -5,6 +5,8 @@ import jv from './img/jv.jpg'
 import matthew from './img/matthew.jpg'
 import foodMain from './img/foodtable.jpg'
 import Image from 'react-bootstrap/Image';
+import firebase from 'firebase/app';
+import 'firebase/auth'; 
 //import Route from './Route';
 import {
     MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavbarToggler, MDBCollapse, 
@@ -13,17 +15,61 @@ import {
 // import App from './App'
 import { Route, Switch, NavLink, Redirect } from 'react-router-dom'
 import App from './App.js';
+import SignUpForm from './Signup';
 
 export default class About extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            email: '',
+            password: '',
+            username: '',
+            user: null,
+            loading : true
+        }; 
+    }
+
+
+
+compondDidMount() {
+        this.authUnRegFunc = firebase.auth().onAuthStateChanged((firebaseUser) => {
+            if(firebaseUser) {
+                this.setState({user: firebaseUser})
+                }else{
+                    this.setState({user: null})
+                }
+        })
+   
+    }
+handleSignUp = (email, password, handle) => {
+// this.setState({errorMessage:null}); //clear any old errors
+
+firebase.auth().createUserWithEmailAndPassword(email, password)
+.then((userCred) => {
+  let user = userCred.user;
+  let userProf = user.updateProfile({
+    displayName : handle,
+  })
+  return userProf;
+}).catch((error) => {
+    this.setState({errorMessage : error.message})
+})
+}
+
+
+
+
     render() {
         return (
             <Switch>
                 <Route exact path='/' component={AboutPage} />
                 <Route exact path='/find' component={App} />
+                <Route exact path='/signup' component={SignUpForm}/>
             </Switch>
         )
     }
 }
+
 
 class Navigation extends Component {
     constructor(props) {
@@ -39,7 +85,7 @@ class Navigation extends Component {
     render() {
         return (
             <div>
-                <MDBNavbar id="navbar" color="indigo" dark expand="md">
+                <MDBNavbar id="navbar" color="indigo" dark expand="md" handleSignUp = {this.handleSignUp}>
                     <MDBNavbarBrand>
                         <strong className="white-text">QuickStops</strong>
                     </MDBNavbarBrand>
@@ -53,6 +99,7 @@ class Navigation extends Component {
                                 {/* <a href="./App.js" className="nav-link">Find</a> */}
                             </MDBNavItem>
                             <MDBNavItem>
+                            <NavLink to='/signup' className="nav-link">Sign In</NavLink>
                                 {/* <a href="" className="nav-link">Saved</a> */}
                             </MDBNavItem>
                             <MDBNavItem>

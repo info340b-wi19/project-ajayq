@@ -1,6 +1,6 @@
 import React, { Component } from 'react'; //import React Component
-
-import './SignUp.css'; //load module CSS
+import handleSignUp from './About';
+import './Signup.css'; //load module CSS
 
 class SignUpForm extends Component {
   constructor(props){
@@ -28,7 +28,7 @@ class SignUpForm extends Component {
   handleSignUp = (event) => {
     event.preventDefault(); //don't submit
     let avatar = this.state.avatar || 'img/no-user-pic.png'; //default to local pic
-    this.props.signUpCallback(this.state.email, this.state.password, this.state.handle, avatar);
+    this.props.handleSignUp(this.state.email, this.state.password, this.state.handle, avatar);
   }
 
   //handle signIn button
