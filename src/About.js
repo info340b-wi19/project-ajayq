@@ -20,7 +20,6 @@ export default class About extends Component {
             <Switch>
                 <Route exact path='/' component={AboutPage} />
                 <Route exact path='/find' component={App} />
-                <Redirect to="/"/>
             </Switch>
         )
     }

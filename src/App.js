@@ -129,6 +129,13 @@ export default class App extends Component {
         })
     }
 
+    // Not yet usable...    
+    // renderLoadingScreen() {
+    //     <div className="spinner-border text-primary" role="status">
+    //         <span className="sr-only">Loading...</span>
+    //     </div>
+    // }
+
     render() {
         return (
         <div id="container">
