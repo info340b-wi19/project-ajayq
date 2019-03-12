@@ -1,0 +1,61 @@
+.id-card {
+    width: 250px;
+    margin: auto;
+    margin-top: 1em;
+    margin-bottom: 1em;
+ }
+ 
+ .flex-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+ }
+
+ .flex-container {
+    display:flex;
+    flex-basis: 33%;
+    background-color: lightgrey;
+}
+.flex-item {
+ 
+  margin: 20px;
+  padding: 10px;
+}
+.flex-title {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.food{
+  height: 100%;   
+  width: 100%;
+}
+.box{
+  position: relative;
+}
+
+.box button{
+  position: absolute;
+  background-color: lightgray;
+  border-radius: 2px solid black;
+  right: 48%;
+  top: 55%;
+
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: transparent;
+  transform: translate(-80%, -80%);
+}
+
+.centered h1 {
+  font-weight: bold;
+  color: white;
+}
+
+.centered p{
+  color: white;
+}
