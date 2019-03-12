@@ -3,6 +3,9 @@ import NavbarPage from './NavbarPage'
 import Map from './Map'
 import axios from 'axios';
 import { MDBAlert } from 'mdbreact';
+import firebase from 'firebase/app';
+import 'firebase/auth'; 
+
 
 
 export default class App extends Component {
@@ -20,7 +23,24 @@ export default class App extends Component {
             price: "",
             distance: 10000,
             limit:20,
+            email: '',
+            password: '',
+            username: '',
+            user: null,
+            loading : true
         }; 
+
+        componentDidMount() {
+            this.authUnRegFunc = firebase.auth().onAuthStateChanged((firebaseUser) => {
+              this.setState({loading:false})
+              if(firebaseUser) {
+                this.setState({user : firebaseUser})
+              } else {
+                this.setState({user:null})
+              }
+            })
+          }
+
 
         if (navigator.geolocation !== undefined) {
             navigator.geolocation.getCurrentPosition((position) => {
