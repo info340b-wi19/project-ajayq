@@ -15,7 +15,8 @@ export default class RestaurantCard extends Component {
                               {this.props.business.location.address1}<br />
                               {this.props.business.location.city}, {this.props.business.location.state} {this.props.business.location.zip_code}
                           </MDBCardText>
-                      <MDBBtn onClick={this.props.hideCard}>Hide business</MDBBtn>
+                      <MDBBtn onClick={this.props.hideCard}>Hide Business</MDBBtn>
+                      <MDBBtn>Save Business</MDBBtn>
                   </MDBCardBody>
               </MDBCard>
           </MDBCol>

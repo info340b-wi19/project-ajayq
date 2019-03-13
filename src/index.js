@@ -11,7 +11,7 @@ import './index.css';
 import './about.css';
 import {BrowserRouter} from 'react-router-dom'; 
 import About from './About';
- import SignUp from './SignUp';
+//import SignUp from './SignUp.js';
 
 
 

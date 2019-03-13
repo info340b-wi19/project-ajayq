@@ -15,7 +15,7 @@ import {
 // import App from './App'
 import { Route, Switch, NavLink } from 'react-router-dom'
 import App from './App';
-import SignUp from './SignUp'
+import SignUp from './Signup';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 
 export default class About extends Component {
