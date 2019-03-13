@@ -21,6 +21,12 @@ import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 export default class About extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+                email: '',
+                password: '',
+                username: '',
+                user: null
+        };
 
     }
 
@@ -73,10 +79,11 @@ class Navigation extends Component {
                                 {/* <a href="./App.js" className="nav-link">Find</a> */}
                             </MDBNavItem>
                             <MDBNavItem>
-                                <NavLink to='/SignUp' className="nav-link">Sign In</NavLink>
+                                <NavLink to='/SignUp' className="nav-link">SignIn</NavLink>
                                 {/* <a href="" className="nav-link">Saved</a> */}
                             </MDBNavItem>
                             <MDBNavItem>
+                                <NavLink to='/' className="nav-link">Saved</NavLink>
                                 {/* <a href="" className="nav-link">About</a> */}
                             </MDBNavItem>
                             <MDBNavItem>
@@ -148,7 +155,7 @@ class AboutPage extends Component {
                                 <h2 className="card-title">Kathy Tran</h2>
                                 <p className="card-text">
                                     Kathy is a sophomore Informatics student at the University of Washington. She is from Olympia, WA and
-                                    enjoys watching Brooklyn-Nine-Nine and take her dog to the park.
+                                    enjoys watching Brooklyn Nine-Nine and take her dog to the park.
                                 </p>
                             </div>
                         </div>

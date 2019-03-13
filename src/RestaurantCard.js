@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol } from 'mdbreact';
+import { runInThisContext } from 'vm';
 
 export default class RestaurantCard extends Component {  
+    saveToFirebase = (event) => {
+        event.preventDefault();
+        let newBusiness = { business : this.props.business, userId : this.props.CurrentUser.uid}
+    }
+
     render() {
         return (
           <MDBCol id="RestaurantCard">
@@ -16,7 +22,7 @@ export default class RestaurantCard extends Component {
                               {this.props.business.location.city}, {this.props.business.location.state} {this.props.business.location.zip_code}
                           </MDBCardText>
                       <MDBBtn onClick={this.props.hideCard}>Hide Business</MDBBtn>
-                      <MDBBtn>Save Business</MDBBtn>
+                      <MDBBtn onClick={this.saveToFirebase}>Save Business</MDBBtn>
                   </MDBCardBody>
               </MDBCard>
           </MDBCol>

@@ -35,6 +35,10 @@ export default class MyMap extends Component {
         })
     }
 
+    saveBus = () => {
+        
+    }
+
     render() {
         return (
             <div >
@@ -50,7 +54,7 @@ export default class MyMap extends Component {
                             return <MyMarker key={business.id} business={business} childSelected={this.childSelected}/>
                     })}
                 </Map>
-                {this.state.doesShowCard ? <RestaurantCard business={this.state.business} hideCard={this.hideCard}/>: null}
+                {this.state.doesShowCard ? <RestaurantCard business={this.state.business} hideCard={this.hideCard} savBus={this.saveBus}/>: null}
             </div>
         )
     }

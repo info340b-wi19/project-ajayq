@@ -67,17 +67,14 @@ class NavbarPage extends Component {
 
           </MDBNavbarNav>
           <MDBNavbarNav right>
-          <MDBNavItem>
-                <a href = '/' className="nav-link">Recent</a>
-            </MDBNavItem>
             <MDBNavItem>
                 <a href="about.html" className="nav-link">Saved</a>
             </MDBNavItem>
           <MDBNavItem>
-                <NavLink to ='/'className="nav-link">About</NavLink>
+                <NavLink to ='/'className="nav-link">Home</NavLink>
             </MDBNavItem>
             <MDBNavItem>
-                <a href="about.html" className="nav-link text-nowrap">Sign In</a>
+                {/*<a href="about.html" className="nav-link text-nowrap">Sign In</a>*/}
             </MDBNavItem>
           </MDBNavbarNav>
         </MDBCollapse>
