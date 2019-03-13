@@ -7,6 +7,7 @@ import foodMain from './img/foodtable.jpg'
 import Image from 'react-bootstrap/Image';
 import firebase from 'firebase';
 import 'firebase/auth';
+import Saved from './Saved.js';
 //import Route from './Route';
 import {
     MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavbarToggler, MDBCollapse,
@@ -38,6 +39,7 @@ export default class About extends Component {
                 <Switch>
                     <Route exact path='/' component={AboutPage} />
                     <Route exact path='/find' component={App} />
+                    <Route exact path='/saved' component={Saved} />
                     <Route path='/SignUp' render={(routerProps) => {
               return <SignUp {...routerProps} handleSignUp={this.handleSignUp} handleSignIn={this.handleSignIn} />
             }} />
@@ -83,7 +85,7 @@ class Navigation extends Component {
                                 {/* <a href="" className="nav-link">Saved</a> */}
                             </MDBNavItem>
                             <MDBNavItem>
-                                <NavLink to='/' className="nav-link">Saved</NavLink>
+                                <NavLink to='/saved' className="nav-link">Saved</NavLink>
                                 {/* <a href="" className="nav-link">About</a> */}
                             </MDBNavItem>
                             <MDBNavItem>

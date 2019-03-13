@@ -1,14 +1,22 @@
 import React, { Component } from 'react';
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol } from 'mdbreact';
 import { runInThisContext } from 'vm';
+import firebase from 'firebase';
 
 export default class RestaurantCard extends Component {  
     saveToFirebase = (event) => {
         event.preventDefault();
-        let newBusiness = { business : this.props.business, userId : this.props.CurrentUser.uid}
+        let newBusiness = { business : this.props.business}
+        this.unAuthSubFunction = firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                console.log(user.uid);
+                firebase.database().ref(user.uid).push(newBusiness.business.id);
+            }
+        })
     }
 
     render() {
+        console.log(firebase.database())
         return (
           <MDBCol id="RestaurantCard">
               <MDBCard id="cardRow">
