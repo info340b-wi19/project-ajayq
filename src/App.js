@@ -3,9 +3,9 @@ import NavbarPage from './NavbarPage'
 import Map from './Map'
 import axios from 'axios';
 import { MDBAlert } from 'mdbreact';
-import firebase from 'firebase/app';
-import 'firebase/auth'; 
-import SignUp from './Signup'
+// import firebase from 'firebase/app';
+// import 'firebase/auth'; 
+
 
 
 

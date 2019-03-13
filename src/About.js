@@ -5,67 +5,38 @@ import jv from './img/jv.jpg'
 import matthew from './img/matthew.jpg'
 import foodMain from './img/foodtable.jpg'
 import Image from 'react-bootstrap/Image';
-import firebase from 'firebase/app';
-import 'firebase/auth'; 
+import firebase from 'firebase';
+import 'firebase/auth';
 //import Route from './Route';
 import {
-    MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavbarToggler, MDBCollapse, 
+    MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavbarToggler, MDBCollapse,
 } from "mdbreact";
 
 // import App from './App'
-import { Route, Switch, NavLink, Redirect } from 'react-router-dom'
-import App from './App.js';
-import SignUpForm from './Signup';
+import { Route, Switch, NavLink } from 'react-router-dom'
+import App from './App';
+import SignUp from './SignUp'
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 
 export default class About extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            email: '',
-            password: '',
-            username: '',
-            user: null,
-            loading : true
-        }; 
+
     }
-
-
-
-compondDidMount() {
-        this.authUnRegFunc = firebase.auth().onAuthStateChanged((firebaseUser) => {
-            if(firebaseUser) {
-                this.setState({user: firebaseUser})
-                }else{
-                    this.setState({user: null})
-                }
-        })
-   
-    }
-handleSignUp = (email, password, handle) => {
-// this.setState({errorMessage:null}); //clear any old errors
-
-firebase.auth().createUserWithEmailAndPassword(email, password)
-.then((userCred) => {
-  let user = userCred.user;
-  let userProf = user.updateProfile({
-    displayName : handle,
-  })
-  return userProf;
-}).catch((error) => {
-    this.setState({errorMessage : error.message})
-})
-}
-
 
 
 
     render() {
         return (
-            <Switch>
-                <Route exact path='/' component={AboutPage} />
-                <Route exact path='/find' component={App} />
-                <Route exact path='/signup' component={SignUpForm}/>
-            </Switch>
+            <div>
+                <Switch>
+                    <Route exact path='/' component={AboutPage} />
+                    <Route exact path='/find' component={App} />
+                    <Route path='/SignUp' render={(routerProps) => {
+              return <SignUp {...routerProps} handleSignUp={this.handleSignUp} handleSignIn={this.handleSignIn} />
+            }} />
+                </Switch>
+            </div>
         )
     }
 }
@@ -78,14 +49,17 @@ class Navigation extends Component {
             isOpen: false,
         };
     }
+
     toggleCollapse = () => {
         this.setState({ isOpen: !this.state.isOpen });
     }
 
     render() {
         return (
+
+
             <div>
-                <MDBNavbar id="navbar" color="indigo" dark expand="md" handleSignUp = {this.handleSignUp}>
+                <MDBNavbar id="navbar" color="indigo" dark expand="md" handleSignUp={this.handleSignUp}>
                     <MDBNavbarBrand>
                         <strong className="white-text">QuickStops</strong>
                     </MDBNavbarBrand>
@@ -99,7 +73,7 @@ class Navigation extends Component {
                                 {/* <a href="./App.js" className="nav-link">Find</a> */}
                             </MDBNavItem>
                             <MDBNavItem>
-                            <NavLink to='/signup' className="nav-link">Sign In</NavLink>
+                                <NavLink to='/SignUp' className="nav-link">Sign In</NavLink>
                                 {/* <a href="" className="nav-link">Saved</a> */}
                             </MDBNavItem>
                             <MDBNavItem>
@@ -169,7 +143,7 @@ class AboutPage extends Component {
                     <h1>Meet Our Team</h1>
                     <div className="flex-container">
                         <div className="card id-card">
-                            <img className="card-img-top cardImg" src={kathy} alt="Kathy"/>
+                            <img className="card-img-top cardImg" src={kathy} alt="Kathy" />
                             <div className="card-body">
                                 <h2 className="card-title">Kathy Tran</h2>
                                 <p className="card-text">
@@ -191,7 +165,7 @@ class AboutPage extends Component {
                         </div>
 
                         <div className="card id-card">
-                            <img className="card-img-top cardImg" src={ajay} alt="Ajay"/>
+                            <img className="card-img-top cardImg" src={ajay} alt="Ajay" />
                             <div className="card-body">
                                 <h2 className="card-title">Ajay Qi</h2>
                                 <p className="card-text">
@@ -202,7 +176,7 @@ class AboutPage extends Component {
                         </div>
 
                         <div className="card id-card">
-                            <img className="card-img-top cardImg" src={matthew} alt="Matthew"/>
+                            <img className="card-img-top cardImg" src={matthew} alt="Matthew" />
                             <div className="card-body">
                                 <h2 className="card-title">Matthew Vogt</h2>
                                 <p className="card-text">

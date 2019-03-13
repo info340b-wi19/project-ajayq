@@ -1,97 +1,88 @@
-import React, { Component } from 'react'; //import React Component
-import handleSignUp from './About';
-import './Signup.css'; //load module CSS
+import React, { Component } from 'react';
 
-class SignUpForm extends Component {
+import About from './About'
+
+import firebase from 'firebase/app';
+ import { NavLink } from 'react-router-dom'
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+
+export default class SignUp extends Component {
   constructor(props){
-    super(props);
+    super(props)
 
-    this.state = {
-      'email': undefined,
-      'password': undefined,
-      'handle': undefined,
-      'avatar': '' //default to blank value
-    }; 
+    this.state = {user: null}
   }
 
-  //update state for specific field
-  handleChange = (event) => {
-    let field = event.target.name; //which input
-    let value = event.target.value; //what value
+  //Configure FirebaseUI (inside the component, public class field)
+  uiConfig = {
+    //which sign in values should we support?
+    signInOptions: [
+      firebase.auth.EmailAuthProvider.PROVIDER_ID,
+      firebase.auth.GoogleAuthProvider.PROVIDER_ID
+    ],
+    //for external sign-in methods, use popup instead of redirect
+    signInFlow: 'popup',
+  };
 
-    let changes = {}; //object to hold changes
-    changes[field] = value; //change this field
-    this.setState(changes); //update state
+  componentDidMount() {
+    //when I signed in or signed out
+    this.authUnSubFunction = firebase.auth().onAuthStateChanged((firebaseUser) => {
+      if(firebaseUser) { //if exists, then we logged in
+        console.log("Logged in as", firebaseUser.email);
+        this.setState({user: firebaseUser})
+      } else {
+        console.log("Logged out");
+        this.setState({user: null})
+      }
+    })
   }
 
-  //handle signUp button
-  handleSignUp = (event) => {
-    event.preventDefault(); //don't submit
-    let avatar = this.state.avatar || 'img/no-user-pic.png'; //default to local pic
-    this.props.handleSignUp(this.state.email, this.state.password, this.state.handle, avatar);
+  componentWillUnmount() {
+    this.authUnSubFunction();
   }
 
-  //handle signIn button
-  handleSignIn = (event) => {
-    event.preventDefault(); //don't submit
-    this.props.signInCallback(this.state.email, this.state.password);
+  handleSignOut = () => {
+    firebase.auth().signOut()
   }
+
+ 
 
   render() {
+    let content = null;
+    if(!this.state.user) { //signed out
+      content = (
+        <StyledFirebaseAuth uiConfig={this.uiConfig} firebaseAuth={firebase.auth()} />
+      )
+    } 
+    else { //signed in
+      content = (
+        <div>
+          <div className="alert alert-success">
+            <h3>Logged in as {this.state.user.displayName}
+              <button className="btn btn-warning float-right" onClick={this.handleSignOut}>
+                Sign Out
+              </button>
+
+            </h3>
+            <NavLink to= '/find'> <button className = 'btn btn-warning'> TEMP BUTTON TO MAP </button> </NavLink>
+          </div>
+          {/* <TaskApp /> */}
+        </div>
+      )
+    }
+
     return (
-      <form>
-        {/* email */}
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input className="form-control" 
-            id="email" 
-            type="email" 
-            name="email"
-            onChange={this.handleChange}
-            />
-        </div>
-        
-        {/* password */}
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input className="form-control" 
-            id="password" 
-            type="password"
-            name="password"
-            onChange={this.handleChange}
-            />
-        </div>
+      <div className="container">
 
-        {/* handle */}
-        <div className="form-group">
-          <label htmlFor="handle">Handle</label>
-          <input className="form-control" 
-            id="handle" 
-            name="handle"
-            onChange={this.handleChange}
-            />
-        </div>
+        {/* Only included if first clause is true */}
+        {this.state.errorMessage &&
+          <p className="alert alert-danger">{this.state.errorMessage}</p>
+        }
 
-        {/* avatar */}
-        <div className="form-group">
-          <img className="avatar" src={this.state.avatar || 'img/no-user-pic.png'} alt="avatar preview" />
-          <label htmlFor="avatar">Avatar Image URL</label>
-          <input className="form-control" 
-            id="avatar" 
-            name="avatar" 
-            placeholder="http://www.example.com/my-picture.jpg" 
-            onChange={this.handleChange}
-            />
-        </div>
+        {/* Show content based on user login state */}
+        {content}
 
-        {/* buttons */}
-        <div className="form-group">
-          <button className="btn btn-primary mr-2" onClick={this.handleSignUp}>Sign-up</button>
-          <button className="btn btn-primary" onClick={this.handleSignIn}>Sign-in</button>
-        </div>
-      </form>
+      </div>
     )
   }
 }
-
-export default SignUpForm
