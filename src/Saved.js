@@ -9,18 +9,18 @@ export default class Saved extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            favorites: null,
+            favBusinesses: null,
         }
 
         this.changeState = this.changeState.bind(this);
     }
 
-    changeState= (data) => {
-        this.setState({favSchools: data})
+    changeState(data) {
+        this.setState({favBusinesses: data})
+        console.log(this.state);
     }
 
-    render() {
-        let renderThis;
+    componentDidMount() {
         this.unAuthSubFunction = firebase.auth().onAuthStateChanged((user) => {
             if (user) {
                 firebase.database().ref(user.uid).on('value', (snapshot) => {
@@ -31,11 +31,14 @@ export default class Saved extends Component {
                             return key;
                         }));
                     }
+                    console.log(favorites);
                     this.changeState(favorites);
                 });
             }
         })
-        // console.log(this.state.favorites);
+    }
+
+    render() {        
         return(
             <h1>Hi</h1>
         )
