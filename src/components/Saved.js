@@ -6,7 +6,8 @@ import Navigation from './Navigation'
 import axios from 'axios';
 import RestaurantCardExtended from './RestaurantCardExtended'
 
-
+//It renders the saved/favorited page with the businesses 
+//the users have selected. 
 export default class Saved extends Component {
     constructor(props) {
         super(props);
@@ -42,6 +43,7 @@ export default class Saved extends Component {
         })
     }
 
+    //grabs the business reviews 
     fetchRestaurantReviews = (businessID) => {
         let url = `https://api.yelp.com/v3/businesses/${businessID}/reviews`
         axios.get(`${'https://cors-anywhere.herokuapp.com/'}` + url, {
@@ -64,6 +66,7 @@ export default class Saved extends Component {
     }
 
 
+    //grabs business data 
     fetchRestaurantData = (businessID) => {
         let url = `https://api.yelp.com/v3/businesses/${businessID}`;
         axios.get(`${'https://cors-anywhere.herokuapp.com/'}` + url, {

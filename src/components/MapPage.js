@@ -3,11 +3,6 @@ import Map from './Map'
 import axios from 'axios';
 import { MDBAlert } from 'mdbreact';
 import MapNavbar from './MapNavbar';
-// import firebase from 'firebase/app';
-// import 'firebase/auth'; 
-
-
-
 
 export default class MapPage extends Component {
 
@@ -50,6 +45,7 @@ export default class MapPage extends Component {
         })
     }
 
+    //Set the states with the user input 
     handleSelect = (evt) => {
         evt.preventDefault();
         let selectName = evt.target.name;
@@ -137,12 +133,6 @@ export default class MapPage extends Component {
         })
     }
 
-    // Not yet usable...    
-    // renderLoadingScreen() {
-    //     <div className="spinner-border text-primary" role="status">
-    //         <span className="sr-only">Loading...</span>
-    //     </div>
-    // }
 
     render() {
         return (

@@ -7,6 +7,9 @@ import Navigation from './Navigation';
 import '../about.css'
 import 'firebase/auth';
 
+//This renders the About Section of the app. It includes information 
+// about the API and the functionality of the application. It also 
+// introduces the team members and explains the usuage in detail. 
 export default class AboutSection extends Component {
     render() {
         return (

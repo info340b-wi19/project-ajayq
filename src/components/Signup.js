@@ -6,14 +6,18 @@ import foodMain from '../img/foodtable.jpg'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import Navigation from './Navigation';
 import '../about.css'
+
+//Formats the sign up and renders users authentication for their account  
 export default class SignUp extends Component {
   constructor(props) {
     super(props)
 
-    this.state = { user: null,
-    display: '' }
+    this.state = {
+      user: null,
+    }
   }
 
+  // Config for the google sign in  
   uiConfig = {
     signInOptions: [
       firebase.auth.EmailAuthProvider.PROVIDER_ID,
@@ -26,10 +30,8 @@ export default class SignUp extends Component {
     //when I signed in or signed out
     this.authUnSubFunction = firebase.auth().onAuthStateChanged((firebaseUser) => {
       if (firebaseUser) { //if exists, then we logged in
-        console.log("Logged in as", firebaseUser.email);
         this.setState({ user: firebaseUser })
       } else {
-        console.log("Logged out");
         this.setState({ user: null })
       }
     })
@@ -46,21 +48,17 @@ export default class SignUp extends Component {
         <StyledFirebaseAuth uiConfig={this.uiConfig} firebaseAuth={firebase.auth()} />
       )
     }
-    else { 
+    else { // If users are already signed in 
       let name = this.state.user.displayName;
       content = (
-    
-      <div>
-          
-        {/* <h1>Welcome {this.state.user.displayName}</h1> */}
-        <AboutPage  name = {name}/>
+        <div>
+          <AboutPage name={name} />
         </div>
       )
     }
 
     return (
       <div>
-        
         {this.state.errorMessage &&
           <p className="alert alert-danger">{this.state.errorMessage}</p>
         }
@@ -70,6 +68,7 @@ export default class SignUp extends Component {
   }
 }
 
+// If logged in -- Users will be redirected to this page as their home page. 
 class AboutPage extends Component {
   render() {
     return (
@@ -78,7 +77,7 @@ class AboutPage extends Component {
         <div className="box">
           <Image id='main-photo' alt="Cups of Beers Being Served" src={foodMain} fluid />
           <div className="centered">
-            <h1>Welcome Back: {this.props.name} </h1> 
+            <h1>Welcome Back: {this.props.name} </h1>
             <p>Find your next adventure!</p>
           </div>
           <NavLink to='/find'>
@@ -90,8 +89,6 @@ class AboutPage extends Component {
           </NavLink>
 
         </div>
-
-
         <div className="flex-container WWW">
           <div className="flex-container">
             <div className="flex-item">

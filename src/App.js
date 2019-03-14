@@ -2,21 +2,17 @@ import React, { Component } from 'react';
 import firebase from 'firebase';
 import 'firebase/auth';
 import Saved from './components/Saved.js';
-
-
-// import App from './App'
 import { Route, Switch} from 'react-router-dom'
 import MapPage from './components/MapPage';
 import SignUp from './components/Signup';
 import AboutSection from './components/AboutSection';
 
+//This class represents the full Quickstops application 
 export default class App extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-             
+        this.state = {      
         };
-
     }
 
     render() {
@@ -33,6 +29,7 @@ export default class App extends Component {
     }
 }
 
+//Calls the Sign Up form for user to authenticate account 
 class SignUpForm extends Component{
     render(){
         return (

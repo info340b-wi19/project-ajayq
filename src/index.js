@@ -1,9 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import App from './App';
 import * as serviceWorker from './components/serviceWorker';
 import firebase from 'firebase/app';
-
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
@@ -12,10 +10,9 @@ import './about.css';
 import {BrowserRouter} from 'react-router-dom'; 
 import App from './App';
 
-//import SignUp from './SignUp.js';
 
 
-
+//Configs for Firebase Usage 
 var config = {
     apiKey: "AIzaSyD8iTViG6ChRhaQOA5PhccfvH8Oqo0Y_io",
     authDomain: "quickstopsajay.firebaseapp.com",

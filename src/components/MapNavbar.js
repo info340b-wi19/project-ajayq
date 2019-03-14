@@ -5,7 +5,6 @@ import {
 import firebase from 'firebase/app';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { NavLink } from 'react-router-dom';
-// import About from './About';
 
 // Constructs a navbar
 // Expects a function which allows the navbar to change the state of the map.
@@ -24,6 +23,7 @@ export default class MapNavbar extends Component {
     this.setState({ isOpen: !this.state.isOpen });
   }
 
+  //handles sign out for the user 
   handleSignOut = () => {
     firebase.auth().signOut()
   }

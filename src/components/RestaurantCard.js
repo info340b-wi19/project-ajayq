@@ -3,7 +3,11 @@ import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, 
 import { runInThisContext } from 'vm';
 import firebase from 'firebase';
 
+//This renders the card of the business information. Contains buttons that allows users 
+//to collapse the cards or save the business for future reference. 
 export default class RestaurantCard extends Component {  
+    
+    //Saves business to the user's account realtime firebase database 
     saveToFirebase = (event) => {
         event.preventDefault();
         let newBusiness = { business : this.props.business}
