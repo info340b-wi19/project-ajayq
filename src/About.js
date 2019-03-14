@@ -18,6 +18,7 @@ import { Route, Switch, NavLink } from 'react-router-dom'
 import App from './App';
 import SignUp from './Signup';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+import MainNavbar from './components/MainNavbar';
 
 export default class About extends Component {
     constructor(props) {
@@ -49,61 +50,11 @@ export default class About extends Component {
     }
 }
 
-
-class Navigation extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isOpen: false,
-        };
-    }
-
-    toggleCollapse = () => {
-        this.setState({ isOpen: !this.state.isOpen });
-    }
-
-    render() {
-        return (
-
-
-            <div>
-                <MDBNavbar id="navbar" color="indigo" dark expand="md" handleSignUp={this.handleSignUp}>
-                    <MDBNavbarBrand>
-                        <strong className="white-text">QuickStops</strong>
-                    </MDBNavbarBrand>
-                    <MDBNavbarToggler onClick={this.toggleCollapse} />
-                    <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
-                        <MDBNavbarNav center="true" className="white-text">
-                        </MDBNavbarNav>
-                        <MDBNavbarNav right>
-                            <MDBNavItem>
-                                <NavLink to='/find' className="nav-link">Find</NavLink>
-                                {/* <a href="./App.js" className="nav-link">Find</a> */}
-                            </MDBNavItem>
-                            <MDBNavItem>
-                                <NavLink to='/SignUp' className="nav-link">SignIn</NavLink>
-                                {/* <a href="" className="nav-link">Saved</a> */}
-                            </MDBNavItem>
-                            <MDBNavItem>
-                                <NavLink to='/saved' className="nav-link">Saved</NavLink>
-                                {/* <a href="" className="nav-link">About</a> */}
-                            </MDBNavItem>
-                            <MDBNavItem>
-                                {/* <a href="" className="nav-link text-nowrap">Sign In</a> */}
-                            </MDBNavItem>
-                        </MDBNavbarNav>
-                    </MDBCollapse>
-                </MDBNavbar>
-            </div>
-        );
-    }
-}
-
 class AboutPage extends Component {
     render() {
         return (
             <div>
-                <Navigation />
+                <MainNavbar />
                 <div className="box">
                     <Image id='main-photo' alt="Cups of Beers Being Served" src={foodMain} fluid />
                     <div className="centered">

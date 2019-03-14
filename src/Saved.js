@@ -3,7 +3,10 @@ import firebase from 'firebase';
 import 'firebase/auth';
 import 'firebase/database';
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol } from 'mdbreact';
-import RestaurantCard from './RestaurantCard';
+import {
+    MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavbarToggler, MDBCollapse,
+} from "mdbreact";
+import MainNavbar from './components/MainNavbar'
 
 export default class Saved extends Component {
     constructor(props) {
@@ -17,7 +20,6 @@ export default class Saved extends Component {
 
     changeState(data) {
         this.setState({favBusinesses: data})
-        console.log(this.state);
     }
 
     componentDidMount() {
@@ -27,11 +29,10 @@ export default class Saved extends Component {
                     let values = snapshot.val();
                     let favorites = null;
                     if (values != null) {
-                        favorites = (Object.keys(values).map(key => {
+                        favorites = (Object.keys(values).map((key) => {
                             return key;
                         }));
                     }
-                    console.log(favorites);
                     this.changeState(favorites);
                 });
             }
@@ -40,7 +41,44 @@ export default class Saved extends Component {
 
     render() {        
         return(
-            <h1>Hi</h1>
+            <MainNavbar />
         )
     }
+}
+
+
+class RestaurantCardExtended extends Component {  
+    saveToFirebase = (event) => {
+        event.preventDefault();
+        let newBusiness = { business : this.props.business}
+        this.unAuthSubFunction = firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                console.log(user.uid);
+                firebase.database().ref(user.uid).push(newBusiness.business.id);
+            }
+        })
+    }
+
+    render() {
+        console.log(firebase.database())
+        return (
+          <MDBCol id="RestaurantCard">
+              <MDBCard id="cardRow">
+                  <MDBCardImage id="cardImg" className="img-fluid" src={this.props.business.image_url} waves alt={this.props.business.name}/>
+                      <MDBCardBody id="card-body">
+                          <MDBCardTitle>{this.props.business.name}</MDBCardTitle>
+                              <MDBCardText>
+                              Rating: {this.props.business.rating} ({this.props.business.review_count} reviews) <br />
+                              {this.props.business.price} | {this.props.business.categories[0].title} <br /><br />
+                              {this.props.business.location.address1}<br />
+                              {this.props.business.location.city}, {this.props.business.location.state} {this.props.business.location.zip_code}
+                          </MDBCardText>
+                      <MDBBtn onClick={this.props.hideCard}>Hide Business</MDBBtn>
+                      <MDBBtn onClick={this.saveToFirebase}>Save Business</MDBBtn>
+                  </MDBCardBody>
+              </MDBCard>
+          </MDBCol>
+        )
+    }
+
 }
