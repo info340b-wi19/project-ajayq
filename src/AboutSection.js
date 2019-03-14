@@ -14,6 +14,18 @@ export default class AboutSection extends Component {
             <Navigation />
         
         <div className="container">
+        <div className="about">
+        <h1>About</h1>
+        <p>QuickStops is powered by the Yelp Fusion API, allowing us to bring you comprehensive information and
+            reviews on millions of businesses across 32 countries. The information available includes...</p>
+        <ul>
+            <li>Ratings</li>
+            <li>Location</li>
+            <li>Price range</li>
+        </ul>
+            <p>We understand that sometimes finding a place to go can be an overwhelming experience.
+            This web application in this space is in response to the lack of crowd sourced review sites with simplistic user interface elements. </p>
+        </div>
                   <h1>Meet Our Team</h1>
                   <div className="flex-container">
                       <div className="card id-card">
@@ -59,7 +71,20 @@ export default class AboutSection extends Component {
                                   </p>
                           </div>
                       </div> 
-                  </div> 
+                  </div>
+                  <div className="usage">
+                   <h1>Usage</h1>
+                   <p>QuickStops allows users to discover businesses from the Find page in a variety of ways once they create an account!</p>
+                   <ul>
+                       <li>Search for businesses by location</li>
+                       <li>Toggle results by your desired price range</li>
+                       <li>Constrain the results by specifying the distance you wish to travel</li>
+                       <li>Filter the results by category of businesses (Brewery, Restaurant)</li>
+                   </ul>
+                   <p>Once logged in, the user can save businesses that catch their eye to quickly access later. To see the list of saved businesses, users can access
+                       them from the favorites button on the homepage or the saved tab on the Find page.
+                   </p>
+                   </div>
                </div>
                </div>
         )

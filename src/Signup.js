@@ -92,7 +92,7 @@ class AboutPage extends Component {
         </div>
 
 
-        <div className="flex-container">
+        <div className="flex-container WWW">
           <div className="flex-container">
             <div className="flex-item">
               <p className="flex-title">WHO</p>
