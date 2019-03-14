@@ -9,7 +9,7 @@ import { NavLink } from 'react-router-dom';
 
 // Constructs a navbar
 // Expects a function which allows the navbar to change the state of the map.
-class NavbarPage extends Component {
+export default class MapNavbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
