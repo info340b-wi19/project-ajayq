@@ -103,15 +103,13 @@ class SearchBar extends Component {
       func: this.props.func
     };
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
+  handleChange = (event) => {
     this.setState({ value: event.target.value });
   }
 
-  handleSubmit(event) {
+  handleSubmit = (event) => {
     // this is where we would somehow change the state again.
     // call yelps, set a new lat and long.... 
     // 
