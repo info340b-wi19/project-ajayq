@@ -3,6 +3,7 @@ import {
   MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavbarToggler, MDBCollapse, MDBFormInline,
 } from "mdbreact";
 import firebase from 'firebase/app';
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { NavLink } from 'react-router-dom';
 // import About from './About';
 
@@ -82,7 +83,7 @@ class NavbarPage extends Component {
               <NavLink to='/saved' className="nav-link">Saved</NavLink>
             </MDBNavItem>
             <MDBNavItem>
-              <button className="btn btn-warning float-right" onClick={this.handleSignOut}> Sign Out</button>
+               {/* <button className="btn btn-warning float-right" onClick={this.handleSignOut}> Sign Out</button> */}
             </MDBNavItem>
           </MDBNavbarNav>
         </MDBCollapse>

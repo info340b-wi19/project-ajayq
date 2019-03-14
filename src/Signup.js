@@ -46,14 +46,19 @@ export default class SignUp extends Component {
         <StyledFirebaseAuth uiConfig={this.uiConfig} firebaseAuth={firebase.auth()} />
       )
     }
-    else { //signed in
+    else { 
+ 
       content = (
+        <div>
+        <h1>Welcome {this.state.user.displayName}</h1>
         <AboutPage />
+        </div>
       )
     }
 
     return (
       <div className="container">
+        
         {this.state.errorMessage &&
           <p className="alert alert-danger">{this.state.errorMessage}</p>
         }
@@ -71,15 +76,15 @@ class AboutPage extends Component {
         <div className="box">
           <Image id='main-photo' alt="Cups of Beers Being Served" src={foodMain} fluid />
           <div className="centered">
-            <h1>Welcome Back! </h1>
+            <h1>Welcome Back:</h1> 
             <p>Find your next adventure!</p>
           </div>
           <NavLink to='/find'>
-            <button className='btn explore'>Explore Now! </button>
+            <button className='btn btn-warning explore'>Explore Now! </button>
           </NavLink>
 
           <NavLink to='/saved'>
-            <button className='btn fav'>Favorites!</button>
+            <button className='btn btn-warning fav'>Favorites!</button>
           </NavLink>
 
         </div>

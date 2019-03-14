@@ -40,7 +40,7 @@
 
 .box button{
   position: absolute;
-  background-color: lightgray;
+  background-color: transparent;
   border-radius: 2px solid black;
 }
 
