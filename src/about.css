@@ -1,6 +1,3 @@
-.container {
-  margin-top: 100px;
-}
 
 .id-card {
     width: 250px;
@@ -34,6 +31,7 @@
   height: 100%;   
   width: 100%;
 }
+
 .box{
   position: relative;
 }
@@ -77,4 +75,29 @@
 
 .box{
   position: relative;
+}
+
+div.about {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+div.usage {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+@media (max-width: 768px) {
+ .btn.explore {
+  display: none;
+} 
+
+.btn.fav {
+  display: none;
+}
+
+.flex-container.WWW{
+  display: none;
+}
+
 }
