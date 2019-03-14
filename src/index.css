@@ -107,3 +107,7 @@ footer {
 .lower-opacity {
   opacity: 0.3;
 }
+
+#RestaurantCardExtended {
+  margin-top: 10px;
+}

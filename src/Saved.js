@@ -25,7 +25,9 @@ export default class Saved extends Component {
             prices:[],
             locations:[],
             coordinates:[],
-            reviews:[]
+            reviews:[],
+            review_counts:[],
+            categories: []
         }
 
         this.changeState = this.changeState.bind(this);
@@ -87,13 +89,20 @@ export default class Saved extends Component {
             names.push(res.data.name);
             let prices = this.state.prices;
             prices.push(res.data.price);
+            let review_counts = this.state.review_counts;
+            review_counts.push(res.data.review_count);
+            let categories = this.state.categories;
+            categories.push(res.data.categories[0].title)
+            let locations = this.state.locations
+            locations.push(res.data.location)
             this.setState({
                 image_urls : image_urls,
                 restaurant_urls: restaurant_urls,
                 ratings: ratings,
                 names: names,
-                prices: prices
-
+                prices: prices,
+                review_counts: review_counts,
+                categories: categories
             })
 
         })
@@ -136,15 +145,18 @@ export default class Saved extends Component {
                 </div>
             )
         } 
-        // let cards;
-        // for (let i = 0; i < this.state.reviews.length; i++) {
-        //     cards.push(<RestaurantCardExtended image_url={this.state.image_urls[i]} name={this.state.names[i]}/>);
-        // }
+        let cards = [];
+        console.log(this.state.locations);
+        for (let i = 0; i < this.state.reviews.length; i++) {
+            cards.push(<RestaurantCardExtended image_url={this.state.image_urls[i]} name={this.state.names[i]} review_count={this.state.review_counts[i]}
+                price={this.state.prices[i]} location={this.state.locations[i]} category={this.state.categories[i]} key={this.state.names[i]}
+                review={this.state.reviews[i]}/>);
+        }
         return (
-            // <div>
+            <div>
                 <MainNavbar />
-                /* {cards}
-            </div> */
+                {cards}
+            </div> 
         )
     }
 }
@@ -155,19 +167,22 @@ class RestaurantCardExtended extends Component {
     render() {
         console.log(firebase.database())
         return (
-          <MDBCol id="RestaurantCard">
+          <MDBCol id="RestaurantCardExtended">
               <MDBCard id="cardRow">
                   <MDBCardImage id="cardImg" className="img-fluid" src={this.props.image_url} waves alt={this.props.name}/>
                       <MDBCardBody id="card-body">
                           <MDBCardTitle>{this.props.name}</MDBCardTitle>
-                              {/* <MDBCardText>
-                              Rating: {this.props.business.rating} ({this.props.business.review_count} reviews) <br />
-                              {this.props.business.price} | {this.props.business.categories[0].title} <br /><br />
-                              {this.props.business.location.address1}<br />
-                              {this.props.business.location.city}, {this.props.business.location.state} {this.props.business.location.zip_code}
-                          </MDBCardText> */}
-                      {/* <MDBBtn onClick={this.props.hideCard}>Hide Business</MDBBtn>
-                      <MDBBtn onClick={this.saveToFirebase}>Save Business</MDBBtn> */}
+                              <MDBCardText>
+                              Rating: {this.props.rating} ({this.props.review_count} reviews) <br />
+                               {this.props.price} | {this.props.category} <br /><br />
+                              {this.props.location.address1}<br />
+                              {this.props.location.city}, {this.props.location.state} {this.props.location.zip_code} <br />
+                              <br />
+                              Reviews: 
+                              <br />
+                              <br />
+                              {this.props.review} 
+                          </MDBCardText> 
                   </MDBCardBody>
               </MDBCard>
           </MDBCol>
