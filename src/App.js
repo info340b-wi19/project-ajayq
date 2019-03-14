@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import NavbarPage from './NavbarPage'
 import Map from './Map'
 import axios from 'axios';
 import { MDBAlert } from 'mdbreact';
+import MapNavbar from './components/MapNavbar';
 // import firebase from 'firebase/app';
 // import 'firebase/auth'; 
 
@@ -30,9 +30,6 @@ export default class App extends Component {
             user: null,
             loading : true
         }; 
-
-
-
 
         if (navigator.geolocation !== undefined) {
             navigator.geolocation.getCurrentPosition((position) => {
@@ -117,7 +114,6 @@ export default class App extends Component {
                 Authorization: `Bearer ${apiKey}`
             }
         })
-
         .then((res) => {
             this.setState({
                 businesses: res.data.businesses,
@@ -126,11 +122,11 @@ export default class App extends Component {
             }, () => {
             })
         })
-            .catch((err) => {
-                this.setState({
-                    addAlert: true
-                })
+        .catch((err) => {
+            this.setState({
+                addAlert: true
             })
+        })
     
 }
 
@@ -151,7 +147,7 @@ export default class App extends Component {
     render() {
         return (
         <div id="container">
-            <NavbarPage func={this.changeState} handleSelect={this.handleSelect} handleCheckBoxChange={this.handleCheckBoxChange}/>
+            <MapNavbar func={this.changeState} handleSelect={this.handleSelect} handleCheckBoxChange={this.handleCheckBoxChange}/>
             {
                 this.state.addAlert ? 
                     <div onClick={() => {this.dismissAlert()}}>

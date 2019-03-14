@@ -32,7 +32,7 @@ class NavbarPage extends Component {
     return (
       <MDBNavbar id="navbar" color="indigo" dark expand="md">
         <MDBNavbarBrand>
-          <strong className="white-text">QuickStops</strong>
+          <NavLink to="/"><strong className="white-text">QuickStops</strong></NavLink>
         </MDBNavbarBrand>
         <MDBNavbarToggler onClick={this.toggleCollapse} />
         <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
@@ -92,7 +92,7 @@ class NavbarPage extends Component {
   }
 }
 
-// The SearchBar is a componenet of the navbar which preforms one of our main functionalities.
+// The SearchBar is a component of the navbar which preforms one of our main functionalities.
 // It has a state which includes the current value inside the search bar and a function 
 // which allows it to change the maps state.
 class SearchBar extends Component {
@@ -130,6 +130,3 @@ class SearchBar extends Component {
     );
   }
 }
-
-
-export default NavbarPage;
