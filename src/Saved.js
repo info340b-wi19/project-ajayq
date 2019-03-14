@@ -125,6 +125,7 @@ export default class Saved extends Component {
                             return value;
                         }));
                     }
+                    favorites = [...new Set(favorites)];
                     this.changeState(favorites);
                 });
             }
