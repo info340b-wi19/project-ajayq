@@ -51,10 +51,11 @@ export default class About extends Component {
 }
 
 class AboutPage extends Component {
-    render() {
+    
+    render() {    
         return (
             <div>
-                <MainNavbar />
+                <MainNavbar page="about"/>
                 <div className="box">
                     <Image id='main-photo' alt="Cups of Beers Being Served" src={foodMain} fluid />
                     <div className="centered">

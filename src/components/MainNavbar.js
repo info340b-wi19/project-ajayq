@@ -4,6 +4,7 @@ import {
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom'
 
+
 export default class MainNavbar extends Component {
     constructor(props) {
         super(props);
@@ -14,12 +15,16 @@ export default class MainNavbar extends Component {
 
     toggleCollapse = () => {
         this.setState({ isOpen: !this.state.isOpen });
-    }
+    } 
 
     render() {
+        //
+        // let signInOrOut = this.props.signedIn ? <NavLink to='/' className="nav-link">SignOut</NavLink> :
+        // <NavLink to='/SignUp' className="nav-link">SignIn</NavLink>
+
+        let aboutOrSaved = this.props.page == "about" ? <NavLink to='/saved' className="nav-link">Saved</NavLink> :
+        <NavLink to='/' className="nav-link">About</NavLink>
         return (
-
-
             <div>
                 <MDBNavbar id="navbar" color="indigo" dark expand="md" handleSignUp={this.handleSignUp}>
                     <MDBNavbarBrand>
@@ -35,15 +40,12 @@ export default class MainNavbar extends Component {
                                 {/* <a href="./App.js" className="nav-link">Find</a> */}
                             </MDBNavItem>
                             <MDBNavItem>
+                                {/*signInOrOut*/}
                                 <NavLink to='/SignUp' className="nav-link">SignIn</NavLink>
-                                {/* <a href="" className="nav-link">Saved</a> */}
                             </MDBNavItem>
                             <MDBNavItem>
-                                <NavLink to='/saved' className="nav-link">Saved</NavLink>
+                                {aboutOrSaved}
                                 {/* <a href="" className="nav-link">About</a> */}
-                            </MDBNavItem>
-                            <MDBNavItem>
-                                {/* <a href="" className="nav-link text-nowrap">Sign In</a> */}
                             </MDBNavItem>
                         </MDBNavbarNav>
                     </MDBCollapse>
