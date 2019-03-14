@@ -1,3 +1,7 @@
+.container {
+  margin-top: 50px;
+}
+
 .id-card {
     width: 250px;
     margin: auto;
@@ -38,9 +42,16 @@
   position: absolute;
   background-color: lightgray;
   border-radius: 2px solid black;
-  right: 48%;
-  top: 55%;
+}
 
+.explore {
+  right: 58%;
+  top: 55%;
+}
+
+.fav {
+  right: 28%;
+  top: 55%;
 }
 
 .centered {

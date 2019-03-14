@@ -1,25 +1,30 @@
 import React, { Component } from "react";
 import {
-MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavbarToggler, MDBCollapse, MDBFormInline,
+  MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavbarToggler, MDBCollapse, MDBFormInline,
 } from "mdbreact";
-import {NavLink} from 'react-router-dom';
+import firebase from 'firebase/app';
+import { NavLink } from 'react-router-dom';
 // import About from './About';
 
 // Constructs a navbar
 // Expects a function which allows the navbar to change the state of the map.
-class NavbarPage extends Component { 
+class NavbarPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isOpen: false,
-      func:this.props.func
+      func: this.props.func
     };
-  
+
   }
 
   // toggles the collapsable part of the navbar when the screen is a smaller size.
   toggleCollapse = () => {
     this.setState({ isOpen: !this.state.isOpen });
+  }
+
+  handleSignOut = () => {
+    firebase.auth().signOut()
   }
 
   render() {
@@ -33,10 +38,10 @@ class NavbarPage extends Component {
           <MDBNavbarNav center="true" className="white-text">
 
             <MDBNavItem>
-                <SearchBar func={this.state.func}/>
+              <SearchBar func={this.state.func} />
             </MDBNavItem>
             <MDBNavItem>
-              <select className="browser-default custom-select" name="term"  onChange={this.props.handleSelect}>
+              <select className="browser-default custom-select" name="term" onChange={this.props.handleSelect}>
                 <option value="" >Category</option>
                 <option value="brewery">Brewery</option>
                 <option value="restaurants">Restaurant</option>
@@ -46,7 +51,7 @@ class NavbarPage extends Component {
               </select>
             </MDBNavItem>
             <MDBNavItem>
-              <select className="browser-default custom-select" name="distance"  onChange={this.props.handleSelect}>
+              <select className="browser-default custom-select" name="distance" onChange={this.props.handleSelect}>
                 <option value="10000">Distance</option>
                 <option value="1609">Walking (1 mile)</option>
                 <option value="3218">Biking (2 miles)</option>
@@ -55,26 +60,29 @@ class NavbarPage extends Component {
             </MDBNavItem>
 
             <MDBNavItem >
-              
+
               <form onChange={this.props.handleCheckBoxChange} name="price">
-                <label className="checkbox-inline"><input type="checkbox" value="1"/>$</label>
+                <label className="checkbox-inline"><input type="checkbox" value="1" />$</label>
                 <label className="checkbox-inline"><input type="checkbox" value="2" />$$</label>
                 <label className="checkbox-inline"><input type="checkbox" value="3" />$$$</label>
                 <label className="checkbox-inline"><input type="checkbox" value="4" />$$$$</label>
               </form>
             </MDBNavItem>
-            
+
 
           </MDBNavbarNav>
           <MDBNavbarNav right>
             <MDBNavItem>
-                <a href="about.html" className="nav-link">Saved</a>
-            </MDBNavItem>
-          <MDBNavItem>
-                <NavLink to ='/'className="nav-link">Home</NavLink>
+              <NavLink to='/' className="nav-link">Home</NavLink>
             </MDBNavItem>
             <MDBNavItem>
-                {/*<a href="about.html" className="nav-link text-nowrap">Sign In</a>*/}
+              <NavLink to='/About' className="nav-link">About</NavLink>
+            </MDBNavItem>
+            <MDBNavItem>
+              <NavLink to='/saved' className="nav-link">Saved</NavLink>
+            </MDBNavItem>
+            <MDBNavItem>
+              <button className="btn btn-warning float-right" onClick={this.handleSignOut}> Sign Out</button>
             </MDBNavItem>
           </MDBNavbarNav>
         </MDBCollapse>
@@ -91,7 +99,7 @@ class SearchBar extends Component {
     super(props);
     this.state = {
       value: '',
-      func:this.props.func
+      func: this.props.func
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -99,7 +107,7 @@ class SearchBar extends Component {
   }
 
   handleChange(event) {
-    this.setState({value: event.target.value});
+    this.setState({ value: event.target.value });
   }
 
   handleSubmit(event) {
