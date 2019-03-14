@@ -47,17 +47,19 @@ export default class SignUp extends Component {
       )
     }
     else { 
- 
+      let name = this.state.user.displayName;
       content = (
-        <div>
-        <h1>Welcome {this.state.user.displayName}</h1>
-        <AboutPage />
+    
+      <div>
+          
+        {/* <h1>Welcome {this.state.user.displayName}</h1> */}
+        <AboutPage  name = {name}/>
         </div>
       )
     }
 
     return (
-      <div className="container">
+      <div>
         
         {this.state.errorMessage &&
           <p className="alert alert-danger">{this.state.errorMessage}</p>
@@ -76,7 +78,7 @@ class AboutPage extends Component {
         <div className="box">
           <Image id='main-photo' alt="Cups of Beers Being Served" src={foodMain} fluid />
           <div className="centered">
-            <h1>Welcome Back:</h1> 
+            <h1>Welcome Back: {this.props.name} </h1> 
             <p>Find your next adventure!</p>
           </div>
           <NavLink to='/find'>

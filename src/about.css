@@ -70,3 +70,11 @@
 .centered p{
   color: white;
 }
+
+#navbar {
+  position: relative;
+}
+
+.box{
+  position: relative;
+}
