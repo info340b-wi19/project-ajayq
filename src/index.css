@@ -97,3 +97,13 @@ footer {
   display: flex;
   align-items: center;
 }
+
+#spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.lower-opacity {
+  opacity: 0.3;
+}
