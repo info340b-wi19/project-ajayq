@@ -14,7 +14,7 @@
 
  .flex-container {
     display:flex;
-    flex-basis: 33%;
+    /* flex-basis: 33%; */
     background-color: lightgrey;
 }
 .flex-item {
@@ -43,7 +43,7 @@
 }
 
 .explore {
-  right: 58%;
+  left: 10%;
   top: 55%;
 }
 
@@ -87,17 +87,26 @@ div.usage {
   margin-bottom: 50px;
 }
 
+
+
+
 @media (max-width: 768px) {
  .btn.explore {
-  display: none;
+    margin-right: 10px;
 } 
 
 .btn.fav {
-  display: none;
+  left: 10%;
+  top: 75%;
 }
 
-.flex-container.WWW{
-  display: none;
+
 }
 
+@media (min-width: 768px) {
+  .flex-container  {
+    flex-basis: 33%; 
+   
+    -webkit-flex-basis: 33%;
+  }
 }
