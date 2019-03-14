@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import firebase from 'firebase';
 import 'firebase/auth';
 import Saved from './components/Saved.js';
 
@@ -28,17 +27,6 @@ export default class App extends Component {
                     <Route exact path='/saved' component={Saved} />
                     <Route exact path= '/About' component={AboutSection} />
                 </Switch>
-            </div>
-        )
-    }
-}
-
-class SignUpForm extends Component{
-    render(){
-        return (
-            <div>
-            <SignUp />
-           
             </div>
         )
     }

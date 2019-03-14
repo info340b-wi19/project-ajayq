@@ -35,6 +35,7 @@ export default class Saved extends Component {
             this.state.favBusinesses.map((businessID) => {
                 this.fetchRestaurantData(businessID);
                 this.fetchRestaurantReviews(businessID);
+                return null;
             })
             this.setState({
                 isLoading : false
