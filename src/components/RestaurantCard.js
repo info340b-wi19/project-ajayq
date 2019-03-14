@@ -15,7 +15,6 @@ export default class RestaurantCard extends Component {
     }
 
     render() {
-        console.log(firebase.database())
         return (
           <MDBCol id="RestaurantCard">
               <MDBCard id="cardRow">

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import kathy from './img/kathy.jpg'
-import ajay from './img/ajay.jpg'
-import jv from './img/jv.jpg'
-import matthew from './img/matthew.jpg'
-import Navigation from './Navigation.js';
-import './about.css'
+import kathy from '../img/kathy.jpg'
+import ajay from '../img/ajay.jpg'
+import jv from '../img/jv.jpg'
+import matthew from '../img/matthew.jpg'
+import Navigation from './Navigation';
+import '../about.css'
 import 'firebase/auth';
 
 export default class AboutSection extends Component {

@@ -35,10 +35,6 @@ export default class MyMap extends Component {
         })
     }
 
-    saveBus = () => {
-        
-    }
-
     render() {
         return (
             <div >

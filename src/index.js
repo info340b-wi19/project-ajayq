@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 // import App from './App';
-import * as serviceWorker from './serviceWorker';
+import * as serviceWorker from './components/serviceWorker';
 import firebase from 'firebase/app';
 
 import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -10,7 +10,7 @@ import 'mdbreact/dist/css/mdb.css';
 import './index.css';
 import './about.css';
 import {BrowserRouter} from 'react-router-dom'; 
-import About from './About';
+import App from './App';
 
 //import SignUp from './SignUp.js';
 
@@ -29,7 +29,7 @@ var config = {
 ReactDOM.render(
     
 <BrowserRouter>
-<About />
+<App />
 </BrowserRouter>
 
 , document.getElementById('root'));

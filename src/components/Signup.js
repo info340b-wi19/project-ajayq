@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import firebase from 'firebase/app';
 import { NavLink } from 'react-router-dom'
 import Image from 'react-bootstrap/Image';
-import foodMain from './img/foodtable.jpg'
+import foodMain from '../img/foodtable.jpg'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import Navigation from './Navigation.js';
-import './about.css';
+import Navigation from './Navigation';
+import '../about.css'
 export default class SignUp extends Component {
   constructor(props) {
     super(props)
