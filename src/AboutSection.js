@@ -7,13 +7,6 @@ import Navigation from './Navigation.js';
 import './about.css'
 import 'firebase/auth';
 
-
-// import App from './App'
-import { Route, Switch, NavLink } from 'react-router-dom'
-import App from './App';
-import SignUp from './Signup';
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-
 export default class AboutSection extends Component {
     render() {
         return (
