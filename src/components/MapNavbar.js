@@ -3,7 +3,6 @@ import {
   MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavbarToggler, MDBCollapse, MDBFormInline,
 } from "mdbreact";
 import firebase from 'firebase/app';
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { NavLink } from 'react-router-dom';
 
 // Constructs a navbar
@@ -103,15 +102,13 @@ class SearchBar extends Component {
       func: this.props.func
     };
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
+  handleChange = (event) => {
     this.setState({ value: event.target.value });
   }
 
-  handleSubmit(event) {
+  handleSubmit = (event) => {
     // this is where we would somehow change the state again.
     // call yelps, set a new lat and long.... 
     // 

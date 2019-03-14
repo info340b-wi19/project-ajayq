@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol } from 'mdbreact';
+import { MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol } from 'mdbreact';
 
 //This represents the business cards that users can interact with in the their favorited 
 //account. Contains unique information including prices and reviews. 

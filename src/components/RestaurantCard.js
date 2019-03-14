@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol } from 'mdbreact';
-import { runInThisContext } from 'vm';
 import firebase from 'firebase';
 
 //This renders the card of the business information. Contains buttons that allows users 
