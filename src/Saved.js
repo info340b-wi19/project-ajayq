@@ -6,7 +6,7 @@ import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, 
 import {
     MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavbarToggler, MDBCollapse,
 } from "mdbreact";
-import MainNavbar from './components/MainNavbar'
+import Navigation from './Navigation'
 import axios from 'axios';
 import RestaurantCard from './RestaurantCard';
 
@@ -48,7 +48,6 @@ export default class Saved extends Component {
 
     fetchRestaurantReviews = (businessID) => {
         let url = `https://api.yelp.com/v3/businesses/${businessID}/reviews`
-        console.log(url)
         axios.get(`${'https://cors-anywhere.herokuapp.com/'}` + url, {
             headers: {
                 Authorization: `Bearer ${apiKey}`
@@ -62,7 +61,6 @@ export default class Saved extends Component {
             })
         })
         .catch((err) => {
-            console.log(err)
             this.setState({
                 addAlert: true
             })
@@ -72,7 +70,6 @@ export default class Saved extends Component {
 
     fetchRestaurantData = (businessID) => {
         let url = `https://api.yelp.com/v3/businesses/${businessID}`;
-        console.log(url)
         axios.get(`${'https://cors-anywhere.herokuapp.com/'}` + url, {
             headers: {
                 Authorization: `Bearer ${apiKey}`
@@ -107,7 +104,6 @@ export default class Saved extends Component {
 
         })
         .catch((err) => {
-            console.log(err)
             this.setState({
                 addAlert: true
             })
@@ -128,6 +124,9 @@ export default class Saved extends Component {
                     favorites = [...new Set(favorites)];
                     this.changeState(favorites);
                 });
+            } else {
+                //console.log("signedOut")
+                // give them an alert that they aren't signed in.
             }
         })
     }
@@ -138,7 +137,7 @@ export default class Saved extends Component {
             return (
                 <div>
                     <div className="lower-opacity">
-                        <MainNavbar />
+                        <Navigation />
                     </div>
                     <div className="spinner-border text-primary" role="status" id="spinner">
                         <span className="sr-only">Loading...</span>
@@ -147,7 +146,6 @@ export default class Saved extends Component {
             )
         } 
         let cards = [];
-        console.log(this.state.locations);
         for (let i = 0; i < this.state.reviews.length; i++) {
             cards.push(<RestaurantCardExtended image_url={this.state.image_urls[i]} name={this.state.names[i]} review_count={this.state.review_counts[i]}
                 price={this.state.prices[i]} location={this.state.locations[i]} category={this.state.categories[i]} key={this.state.names[i]}
@@ -155,7 +153,7 @@ export default class Saved extends Component {
         }
         return (
             <div>
-                <MainNavbar />
+                <Navigation />
                 {cards}
             </div> 
         )
@@ -166,7 +164,6 @@ export default class Saved extends Component {
 class RestaurantCardExtended extends Component {  
 
     render() {
-        console.log(firebase.database())
         return (
           <MDBCol id="RestaurantCardExtended">
               <MDBCard id="cardRow">
