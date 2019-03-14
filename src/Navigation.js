@@ -27,7 +27,7 @@ export default class Navigation extends Component {
           <div>
               <MDBNavbar id="navbar" color="indigo" dark expand="md" >
                   <MDBNavbarBrand>
-                      <strong className="white-text">QuickStops</strong>
+                      <NavLink to="/" ><strong className="white-text">QuickStops</strong></NavLink>
                   </MDBNavbarBrand>
                   <MDBNavbarToggler onClick={this.toggleCollapse} />
                   <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
