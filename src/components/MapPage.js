@@ -36,8 +36,14 @@ export default class MapPage extends Component {
                 }, () => {
                     this.yelpCallWithCoordinates();
                 });
+            }, () => {
+                this.setState({
+                    isLoading:true
+                })
+                this.yelpCallWithCoordinates();
             });
         } 
+
     }
 
     // A function we pass down to the navbar, then the search bar to update our state
@@ -60,7 +66,6 @@ export default class MapPage extends Component {
             this.yelpCallWithCoordinates();
         })
     }
-
 
     handleCheckBoxChange = (event) => {
         let oldPrice = this.state.price === "" ? [] : this.state.price.split(",");
@@ -148,6 +153,10 @@ export default class MapPage extends Component {
         this.setState({
             alertMessage: "Saving Requires Sign In"
         })
+    }
+
+    componentDidMount() {
+        
     }
 
 
