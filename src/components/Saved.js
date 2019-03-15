@@ -63,7 +63,7 @@ export default class Saved extends Component {
         })
         .catch((err) => {
             this.setState({
-                alertMessage: "Connection error, check your internet connection."
+                alertMessage: err
             })
         })
     }
@@ -107,7 +107,7 @@ export default class Saved extends Component {
         })
         .catch((err) => {
             this.setState({
-                alertMessage: "Connection error, check your internet connection."
+                alertMessage: err
             })
         })
     }
