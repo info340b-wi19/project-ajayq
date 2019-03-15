@@ -13,6 +13,8 @@ export default class RestaurantCard extends Component {
         this.unAuthSubFunction = firebase.auth().onAuthStateChanged((user) => {
             if (user) {
                 firebase.database().ref(user.uid).push(newBusiness.business.id);
+            } else {
+                this.props.requestSignIn();
             }
         })
     }

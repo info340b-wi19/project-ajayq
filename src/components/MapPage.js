@@ -3,6 +3,7 @@ import Map from './Map'
 import axios from 'axios';
 import { MDBAlert } from 'mdbreact';
 import MapNavbar from './MapNavbar';
+import {NavLink} from 'react-router-dom'
 
 export default class MapPage extends Component {
 
@@ -144,7 +145,13 @@ export default class MapPage extends Component {
         })
     }
 
-    
+    requestSignIn = () => {
+        this.setState({
+            alertMessage: "Saving Requires Sign In"
+        })
+    }
+
+
     render() {
         let error = this.state.alertMessage !== "" ? 
             <div onClick={() => {this.dismissAlert()}}>
@@ -159,13 +166,25 @@ export default class MapPage extends Component {
             </div>
             : null
         let loweredOpacity = this.state.isLoading ? "lower-opacity" : ""
+        let signIn = null;
+        if (this.state.alertMessage === "Saving Requires Sign In") {
+            signIn = <div onClick={() => {this.dismissAlert()}}>
+                    <MDBAlert color="danger" dismiss>
+                    Saving Requires
+                    <NavLink to="/"> Signing in</NavLink>
+                </MDBAlert>
+                </div>
+            loweredOpacity = "lower-opacity";
+        }
+        
         return (
-            <div id="container" >
+            <div id="" >
+                {signIn}
                 {loading}
-                <div className={loweredOpacity}>
+                <div id="container" className={loweredOpacity}>
                     <MapNavbar func={this.changeState} handleSelect={this.handleSelect} handleCheckBoxChange={this.handleCheckBoxChange}/>
                     {error}
-                    <Map navBarValue={this.state.navValue} id="contain" lat={this.state.lat} long={this.state.long} businesses={this.state.businesses} />
+                    <Map requestSignIn={this.requestSignIn} navBarValue={this.state.navValue} id="contain" lat={this.state.lat} long={this.state.long} businesses={this.state.businesses} />
                     <footer role="contentinfo">© 2018 Copyright: Quickstops</footer>
                 </div>
             </div>
