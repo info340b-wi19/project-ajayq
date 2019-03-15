@@ -38,7 +38,7 @@ export default class Saved extends Component {
                 setTimeout( () => {
                     this.fetchRestaurantData(businessID);
                     this.fetchRestaurantReviews(businessID);
-                }, 250 * index );
+                }, 400 * index );
             })
             this.setState({
                 isLoading : false
