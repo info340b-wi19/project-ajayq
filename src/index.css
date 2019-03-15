@@ -102,10 +102,15 @@ footer {
   position: absolute;
   top: 40%;
   left: 45%;
+  z-index: 10
 }
 
 .lower-opacity {
   opacity: 0.3;
+}
+
+#spinner {
+  opacity: 1;
 }
 
 #RestaurantCardExtended {

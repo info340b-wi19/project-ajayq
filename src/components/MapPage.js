@@ -14,7 +14,7 @@ export default class MapPage extends Component {
             businesses: [],
             lat: 37.787789124691,
             long:-122.399305736113,
-            addAlert:false,
+            alertMessage:"",
             term: "",
             price: "",
             distance: 10000,
@@ -23,13 +23,18 @@ export default class MapPage extends Component {
             password: '',
             username: '',
             user: null,
-            loading : true
+            isLoading : true
         }; 
 
         if (navigator.geolocation !== undefined) {
             navigator.geolocation.getCurrentPosition((position) => {
-                this.setState({ lat: position.coords.latitude, long: position.coords.longitude });
-                this.yelpCallWithCoordinates();
+                this.setState({ 
+                    lat: position.coords.latitude,
+                    long: position.coords.longitude,
+                    isLoading:true 
+                }, () => {
+                    this.yelpCallWithCoordinates();
+                });
             });
         }
 
@@ -39,18 +44,19 @@ export default class MapPage extends Component {
     // after the new state has been set, a call to the yelp api is made using the newly updated state
     changeState = (passedNavValue) => {
         this.setState({
-            navValue: passedNavValue
+            navValue: passedNavValue,
+            isLoading: true
         }, () => {
-            this.yelpCallWithLocation(this.state.navValue)
+            this.yelpCallWithLocation()
         })
     }
 
-    //Set the states with the user input 
+    //Sets the state with the user input 
     handleSelect = (evt) => {
         evt.preventDefault();
         let selectName = evt.target.name;
         let selectedValue = evt.target.value;
-        this.setState({ [selectName]: selectedValue }, () => {
+        this.setState({ [selectName]: selectedValue, isLoading:true }, () => {
             this.yelpCallWithCoordinates();
         })
     }
@@ -64,7 +70,7 @@ export default class MapPage extends Component {
         } else {
             oldPrice.push(event.target.value);
         }
-        this.setState({ price : oldPrice.toString() }, () => {
+        this.setState({ price : oldPrice.toString(), isLoading: true }, () => {
             this.yelpCallWithCoordinates();
         })
     }
@@ -73,6 +79,7 @@ export default class MapPage extends Component {
     // sets the state of the businesses within the location.
     // uses the current state's latitude and longitude.
     yelpCallWithCoordinates = () => {
+
         let url = `https://api.yelp.com/v3/businesses/search?` +
         `latitude=${this.state.lat}` +
         `&longitude=${this.state.long}` +
@@ -86,12 +93,14 @@ export default class MapPage extends Component {
         })
         .then((res) => {
             this.setState({
-                businesses: res.data.businesses
+                businesses: res.data.businesses,
+                isLoading: false
             })
         })
         .catch((err) => {
             this.setState({
-                addAlert: true
+                isLoading: false,
+                alertMessage: "Connection error, check your internet connection."
             })
         })
     }
@@ -101,7 +110,7 @@ export default class MapPage extends Component {
     // not best practice... especially sending private keys through another site
     // this function updates the state and takes in a location argument which was originally from the navbar
     // updates the latitude and longitude based on the yelp api response
-    yelpCallWithLocation = (arg) => {
+    yelpCallWithLocation = () => {
         axios.get(`${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search?location=${this.state.navValue}
         ${this.state.term === "" ? "" : "&term="+ this.state.term}
         ${this.state.price !== "" ? "&price=" + this.state.price : ""}
@@ -114,44 +123,52 @@ export default class MapPage extends Component {
             this.setState({
                 businesses: res.data.businesses,
                 lat: res.data.region.center.latitude,
-                long: res.data.region.center.longitude
+                long: res.data.region.center.longitude,
+                isLoading: false
             }, () => {
             })
         })
         .catch((err) => {
             this.setState({
-                addAlert: true
+                isLoading: false,
+                alertMessage: "Connection error, check your internet connection."
             })
         })
     
 }
 
-    // Removes the alert by setting the addAlert state to false
+    // Removes the alert by setting the alert message to nothing
     dismissAlert() {
         this.setState({
-            addAlert: false
+            alertMessage: ""
         })
     }
 
-
+    
     render() {
-        return (
-        <div id="container">
-            <MapNavbar func={this.changeState} handleSelect={this.handleSelect} handleCheckBoxChange={this.handleCheckBoxChange}/>
-            {
-                this.state.addAlert ? 
-                    <div onClick={() => {this.dismissAlert()}}>
-                        <MDBAlert color="danger" dismiss>
-                            Failed location search. Check your internet connection.
-                        </MDBAlert>
-                        </div>
-                        : null
-                }
-                <Map navBarValue={this.state.navValue} id="contain" lat={this.state.lat} long={this.state.long} businesses={this.state.businesses} />
-                <footer role="contentinfo">© 2018 Copyright: Quickstops</footer>
+        let error = this.state.alertMessage !== "" ? 
+            <div onClick={() => {this.dismissAlert()}}>
+                <MDBAlert color="danger" dismiss>
+                    {this.state.alertMessage}
+                </MDBAlert>
             </div>
-            
-            
+            : null
+        let loading = this.state.isLoading ? 
+            <div className="spinner-border centered-absolute text-primary" role="status" id="spinner">
+                <span className="sr-only">Loading...</span>
+            </div>
+            : null
+        let loweredOpacity = this.state.isLoading ? "lower-opacity" : ""
+        return (
+            <div id="container" >
+                {loading}
+                <div className={loweredOpacity}>
+                    <MapNavbar func={this.changeState} handleSelect={this.handleSelect} handleCheckBoxChange={this.handleCheckBoxChange}/>
+                    {error}
+                    <Map navBarValue={this.state.navValue} id="contain" lat={this.state.lat} long={this.state.long} businesses={this.state.businesses} />
+                    <footer role="contentinfo">© 2018 Copyright: Quickstops</footer>
+                </div>
+            </div>
         )
     }
 }
