@@ -34,9 +34,11 @@ export default class Saved extends Component {
     //Once the businessID's have been fetched, fetch other information
     changeState = (data) => {
         this.setState({favBusinesses: data}, () => {
-            this.state.favBusinesses.forEach((businessID) => {
-                this.fetchRestaurantData(businessID);
-                this.fetchRestaurantReviews(businessID);
+            this.state.favBusinesses.forEach((businessID, index) => {
+                setTimeout( () => {
+                    this.fetchRestaurantData(businessID);
+                    this.fetchRestaurantReviews(businessID);
+                }, 250 * index );
             })
             this.setState({
                 isLoading : false

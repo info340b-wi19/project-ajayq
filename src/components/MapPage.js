@@ -24,7 +24,7 @@ export default class MapPage extends Component {
             password: '',
             username: '',
             user: null,
-            isLoading : true
+            isLoading : false
         }; 
 
         if (navigator.geolocation !== undefined) {
@@ -37,8 +37,7 @@ export default class MapPage extends Component {
                     this.yelpCallWithCoordinates();
                 });
             });
-        }
-
+        } 
     }
 
     // A function we pass down to the navbar, then the search bar to update our state
