@@ -54,7 +54,7 @@ export default class Navigation extends Component {
                                 {/* <a href="" className="nav-link">About</a> */}
                             </MDBNavItem>
                             <MDBNavItem>
-                                <button className="btn btn-warning float-right" onClick={this.handleSignOut}> Sign Out</button>
+                               <NavLink to='/' className="nav-link"><button className="btn btn-warning float-right" onClick={this.handleSignOut}> Sign Out</button></NavLink> 
                             </MDBNavItem>
                         </MDBNavbarNav>
                     </MDBCollapse>

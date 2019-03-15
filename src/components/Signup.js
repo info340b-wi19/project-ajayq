@@ -41,11 +41,16 @@ export default class SignUp extends Component {
     this.authUnSubFunction();
   }
 
+  handleSignOut = () => {
+    firebase.auth().signOut()
+}
+
   render() {
     let content = null;
     if (!this.state.user) { //signed out
       content = (
         <StyledFirebaseAuth uiConfig={this.uiConfig} firebaseAuth={firebase.auth()} />
+        
       )
     }
     else { // If users are already signed in 
