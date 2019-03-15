@@ -5,6 +5,8 @@ import 'firebase/database';
 import Navigation from './Navigation'
 import axios from 'axios';
 import RestaurantCardExtended from './RestaurantCardExtended'
+import { NavLink } from 'react-router-dom'
+
 
 //It renders the saved/favorited page with the businesses 
 //the users have selected. 
@@ -14,7 +16,7 @@ export default class Saved extends Component {
         this.state = {
             favBusinesses: null,
             isLoading: true,
-            addAlert: false,
+            alertMessage: "",
             image_urls: [],
             restaurant_urls: [],
             ratings: [],
@@ -27,16 +29,14 @@ export default class Saved extends Component {
             categories: []
         }
 
-        this.changeState = this.changeState.bind(this);
     }
 
     //Once the businessID's have been fetched, fetch other information
-    changeState(data) {
+    changeState = (data) => {
         this.setState({favBusinesses: data}, () => {
-            this.state.favBusinesses.map((businessID) => {
+            this.state.favBusinesses.forEach((businessID) => {
                 this.fetchRestaurantData(businessID);
                 this.fetchRestaurantReviews(businessID);
-                return null;
             })
             this.setState({
                 isLoading : false
@@ -61,7 +61,7 @@ export default class Saved extends Component {
         })
         .catch((err) => {
             this.setState({
-                addAlert: true
+                alertMessage: "Connection error, check your internet connection."
             })
         })
     }
@@ -105,7 +105,7 @@ export default class Saved extends Component {
         })
         .catch((err) => {
             this.setState({
-                addAlert: true
+                alertMessage: "Connection error, check your internet connection."
             })
         })
     }
@@ -125,21 +125,31 @@ export default class Saved extends Component {
                     this.changeState(favorites);
                 });
             } else {
-                //console.log("signedOut")
-                // give them an alert that they aren't signed in.
+                this.setState({
+                    alertMessage: "Requires Sign in"
+                })
             }
         })
     }
 
 
     render() {
+        if (this.state.alertMessage !== "") {
+            return (
+                <div className="centered-absolute">
+                    <h2>{this.state.alertMessage}</h2>
+                    <NavLink to="/"><button className="btn btn-warning">Go back to Sign in</button></NavLink>
+                </div>
+            )
+        }
+
         if (this.state.isLoading || this.state.reviews.length !== this.state.restaurant_urls.length) {
             return (
                 <div>
                     <div className="lower-opacity">
                         <Navigation />
                     </div>
-                    <div className="spinner-border text-primary" role="status" id="spinner">
+                    <div className="spinner-border centered-absolute text-primary" role="status" id="spinner">
                         <span className="sr-only">Loading...</span>
                     </div>
                 </div>
@@ -159,7 +169,5 @@ export default class Saved extends Component {
         )
     }
 }
-
-
 
 let apiKey = "TMcGNjy6GrtE3xc5EFSCuNfX202sXbkyE9yq2pguPydM5ajHiNEjp8nd7qdOhZgHCO8FFk2OtpEolPd-6iTMVsp_frK2N0tx2gc1NEH0EaloyEWx-BJs1bHXT7F9XHYx";
