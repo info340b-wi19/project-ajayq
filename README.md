@@ -16,3 +16,4 @@ How to use our app:
 The site can be viewed at <https://quickstopsajay.firebaseapp.com/>
 
 
+This project was bootstrapped with Create React App.
